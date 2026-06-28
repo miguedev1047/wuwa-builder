@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wuwa-builds",
+  "compatibility_date": "2026-03-17",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "enable_request_signal",
+    "request_signal_passthrough",
+    "no_handle_cross_request_promise_resolution",
+  ],
+  "placement": {
+    "mode": "smart",
+  },
+  "main": "@tanstack/react-start/server-entry",
+  "observability": {
+    "enabled": true,
+  },
+  "d1_databases": [
+    {
+      "binding": "wuwa_builds_db",
+      "database_name": "wuwa-builds-db",
+      "database_id": "d1a96577-722a-4788-88f9-3b4f27a20b20",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "wuwa_builds_storage",
+      "bucket_name": "wuwa-builds-storage",
+      "remote": false,
+    },
+  ],
+}
