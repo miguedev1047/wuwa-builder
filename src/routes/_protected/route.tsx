@@ -11,9 +11,5 @@ export const Route = createFileRoute('/_protected')({
 
     return { user: session.user }
   },
-  component: () => (
-    <div className="p-8">
-      <Outlet />
-    </div>
-  ),
+  component: () => <Outlet />,
 })
