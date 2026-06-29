@@ -1,7 +1,7 @@
 import { db } from '#/db'
 import { resonatorAssetsTable, resonatorsTable } from '#/db/schemas/resonators'
 import { entityIdZod } from '#/zod-schemas/general/entity-id'
-import { resonatorZod } from '#/zod-schemas/resonators/items'
+import { resonatorZod } from '#/zod-schemas/resonators'
 import { protectedProcedure, publicProcedure } from '@/integrations/orpc'
 import { ORPCError } from '@orpc/server'
 import { eq } from 'drizzle-orm'

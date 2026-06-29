@@ -1,7 +1,9 @@
 import { db } from '#/db'
 import { resonatorAssetsTable } from '#/db/schemas/resonators'
-import { imageRemoveZodSchema } from '#/zod-schemas/images/remove'
-import { imageUploadZodSchema } from '#/zod-schemas/images/upload'
+import {
+  imageRemoveZodSchema,
+  imageUploadZodSchema,
+} from '#/zod-schemas/images'
 import { env } from 'cloudflare:workers'
 import { eq } from 'drizzle-orm'
 import { protectedProcedure } from '#/integrations/orpc'

@@ -1,10 +1,7 @@
 import { DEFAULT_DESCRIPTION } from '#/constants/general'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useAppForm } from '#/shared/contexts/form.context'
-import {
-  resonatorZod,
-  type TResonatorZod,
-} from '#/zod-schemas/resonators/items'
+import { resonatorZod, type TResonatorZod } from '#/zod-schemas/resonators'
 import { createId } from '@paralleldrive/cuid2'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'

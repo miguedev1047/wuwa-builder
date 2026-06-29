@@ -1,5 +1,5 @@
 import { withForm } from '#/shared/contexts/form.context'
-import type { TResonatorZod } from '#/zod-schemas/resonators/items'
+import { type TResonatorZod } from '#/zod-schemas/resonators'
 import { TiptapEditor } from '#/components/editor'
 import {
   Field,
