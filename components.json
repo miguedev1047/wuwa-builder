@@ -19,7 +19,7 @@
   },
   "iconLibrary": "remixicon",
   "rtl": false,
-  "menuColor": "default",
+  "menuColor": "default-translucent",
   "menuAccent": "subtle",
   "registries": {}
 }
