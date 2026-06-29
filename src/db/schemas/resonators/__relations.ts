@@ -35,6 +35,16 @@ export const resonatorAssetsRelations = relations(
   }),
 )
 
+export const resonatorLevelRelations = relations(
+  resonatorLevelsTable,
+  ({ one }) => ({
+    resonator: one(resonatorsTable, {
+      fields: [resonatorLevelsTable.resonator_id],
+      references: [resonatorsTable.id],
+    }),
+  }),
+)
+
 export const resonatorSkillsRelations = relations(
   resonatorSkillsTable,
   ({ one, many }) => ({
