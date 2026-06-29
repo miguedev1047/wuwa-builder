@@ -9,6 +9,7 @@ import type { QueryClient } from '@tanstack/react-query'
 import appCss from '../styles/main.css?url'
 import { ThemeProvider } from '#/components/theme-provider'
 import { Toaster } from '#/components/ui/sonner'
+import { TooltipProvider } from '#/components/ui/tooltip'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -46,7 +47,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
           <TanstackAppDevTools />
           <Toaster />
         </ThemeProvider>
