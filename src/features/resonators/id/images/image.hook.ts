@@ -13,10 +13,10 @@ export function useResonatorImageUpload() {
   })
 
   const { data: resonator } = useSuspenseQuery(
-    orpc.resonators.items.getById.queryOptions({ input: { id: resonatorId } }),
+    orpc.resonators.resonator.getById.queryOptions({ input: { id: resonatorId } }),
   )
 
-  const queryKey = orpc.resonators.items.getById.queryKey({
+  const queryKey = orpc.resonators.resonator.getById.queryKey({
     input: { id: resonatorId },
   })
   const queryClient = useQueryClient()
