@@ -7,7 +7,7 @@ import {
 } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 import { resonatorsTable } from '#/db/schemas/resonators/items'
-import { weaponsTable } from '#/db/schemas/weapons'
+import { weaponTable } from '#/db/schemas/weapons'
 
 export const resonatorBestWeaponsTable = sqliteTable(
   'resonator_best_weapons',
@@ -20,7 +20,7 @@ export const resonatorBestWeaponsTable = sqliteTable(
       .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
     weapon_id: text('weapon_id')
       .notNull()
-      .references(() => weaponsTable.id, { onDelete: 'cascade' }),
+      .references(() => weaponTable.id, { onDelete: 'cascade' }),
     order: integer('order').notNull(),
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
       .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)

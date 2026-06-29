@@ -6,7 +6,7 @@ import {
   text,
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
-import { weaponsTable } from '#/db/schemas/weapons/items'
+import { weaponTable } from '#/db/schemas/weapons/items'
 import { createId } from '@paralleldrive/cuid2'
 
 export const weaponsRefinamentsTable = sqliteTable(
@@ -17,7 +17,7 @@ export const weaponsRefinamentsTable = sqliteTable(
       .$default(() => createId()),
     weapon_id: text('weapon_id')
       .notNull()
-      .references(() => weaponsTable.id, { onDelete: 'cascade' }),
+      .references(() => weaponTable.id, { onDelete: 'cascade' }),
     refinament_value: text('refinament_value').notNull(),
     refinament_description: text('refinament_description', { mode: 'json' })
       .$type<TiptapNodeProps>()

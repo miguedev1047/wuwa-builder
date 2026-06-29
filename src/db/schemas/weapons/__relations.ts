@@ -1,41 +1,38 @@
 import { relations } from 'drizzle-orm'
-import {
-  weaponAssetsSchemaTable,
-  weaponsTable,
-} from '#/db/schemas/weapons/items'
+import { weaponAssetsTable, weaponTable } from '#/db/schemas/weapons/items'
 import { weaponLevels } from '#/db/schemas/weapons/levels'
 import { weaponsRefinamentsTable } from '#/db/schemas/weapons/refinaments'
 import { weaponAdditionalStatsTable } from '#/db/schemas/weapons/additional-stats'
 
-export const weaponRelations = relations(weaponsTable, ({ many }) => ({
-  assets: many(weaponAssetsSchemaTable),
+export const weaponRelations = relations(weaponTable, ({ many }) => ({
+  assets: many(weaponAssetsTable),
   levels: many(weaponLevels),
   refinaments: many(weaponsRefinamentsTable),
 }))
 
 export const weaponAssetsRelations = relations(
-  weaponAssetsSchemaTable,
+  weaponAssetsTable,
   ({ one }) => ({
-    weapon: one(weaponsTable, {
-      fields: [weaponAssetsSchemaTable.weapon_id],
-      references: [weaponsTable.id],
+    weapon: one(weaponTable, {
+      fields: [weaponAssetsTable.weapon_id],
+      references: [weaponTable.id],
     }),
   }),
 )
 
 export const weaponLevelsRelations = relations(weaponLevels, ({ one }) => ({
-  weapon: one(weaponsTable, {
+  weapon: one(weaponTable, {
     fields: [weaponLevels.weapon_id],
-    references: [weaponsTable.id],
+    references: [weaponTable.id],
   }),
 }))
 
 export const weaponsRefinamentsRelations = relations(
   weaponsRefinamentsTable,
   ({ one, many }) => ({
-    weapon: one(weaponsTable, {
+    weapon: one(weaponTable, {
       fields: [weaponsRefinamentsTable.weapon_id],
-      references: [weaponsTable.id],
+      references: [weaponTable.id],
     }),
     additional_stats: many(weaponAdditionalStatsTable),
   }),

@@ -9,7 +9,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 
-export const weaponsTable = sqliteTable('weapons', {
+export const weaponTable = sqliteTable('weapons', {
   id: text('id')
     .primaryKey()
     .$default(() => createId()),
@@ -31,14 +31,14 @@ export const weaponsTable = sqliteTable('weapons', {
     .notNull(),
 })
 
-export const weaponAssetsSchemaTable = sqliteTable(
+export const weaponAssetsTable = sqliteTable(
   'weapon_assets',
   {
     ...createAssetColumns(),
 
     weapon_id: text('weapon_id')
       .notNull()
-      .references(() => weaponsTable.id, { onDelete: 'cascade' }),
+      .references(() => weaponTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
     uniqueIndex('weapon_assets_unique').on(table.weapon_id, table.order),
