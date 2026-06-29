@@ -1,5 +1,5 @@
-import { resonatorRouter } from '#/integrations/orpc/routers/resonators'
+import { resonatorsRouter } from '#/integrations/orpc/routers/resonators'
 
 export const appRouter = {
-  resonators: resonatorRouter,
+  resonators: resonatorsRouter,
 }

@@ -12,7 +12,7 @@ export const Route = createFileRoute(
   errorComponent: () => <div>Ha ocurrido un error al obtener el resonador</div>,
   loader: ({ context, params }) => {
     context.queryClient.ensureQueryData(
-      orpc.resonators.items.getById.queryOptions({ input: { id: params.id } }),
+      orpc.resonators.resonator.getById.queryOptions({ input: { id: params.id } }),
     )
   },
 })

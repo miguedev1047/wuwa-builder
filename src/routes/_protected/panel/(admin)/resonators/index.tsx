@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_protected/panel/(admin)/resonators/')({
   ),
   loader: ({ context }) => {
     context.queryClient.ensureQueryData(
-      orpc.resonators.items.getAll.queryOptions(),
+      orpc.resonators.resonator.getAll.queryOptions(),
     )
   },
   component: () => <ResonatorAdminView />,
