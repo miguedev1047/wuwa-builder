@@ -67,84 +67,78 @@ export const resonatorRouter = {
       return resonator
     } catch {
       throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        data: [],
+        data: null,
         message: 'Ha ocurrido un error al obtener los resonadores',
       })
     }
   }),
 
-  create: protectedProcedure
-    .input(resonatorZod)
-    .handler(async ({ input }) => {
-      const { ...resonatorData } = input
+  create: protectedProcedure.input(resonatorZod).handler(async ({ input }) => {
+    const { ...resonatorData } = input
 
-      try {
-        await db.insert(resonatorsTable).values(resonatorData)
+    try {
+      await db.insert(resonatorsTable).values(resonatorData)
 
-        return {
-          code: 'SUCCESS',
-          message: 'Resonador agregado',
-        }
-      } catch {
-        return {
-          code: 'ERROR',
-          message: 'Error al agregar el resonador',
-        }
+      return {
+        code: 'SUCCESS',
+        message: 'Resonador agregado',
       }
-    }),
-
-  update: protectedProcedure
-    .input(resonatorZod)
-    .handler(async ({ input }) => {
-      const { ...resonatorData } = input
-
-      if (!resonatorData.id) {
-        throw new ORPCError('NOT_FOUND', {
-          message: 'Resonador no encontrado',
-        })
+    } catch {
+      return {
+        code: 'ERROR',
+        message: 'Error al agregar el resonador',
       }
+    }
+  }),
 
-      try {
-        await db
-          .update(resonatorsTable)
-          .set(resonatorData)
-          .where(eq(resonatorsTable.id, resonatorData.id))
+  update: protectedProcedure.input(resonatorZod).handler(async ({ input }) => {
+    const { ...resonatorData } = input
 
-        return {
-          code: 'SUCCESS',
-          message: 'Resonador actualizado',
-        }
-      } catch {
-        return {
-          code: 'ERROR',
-          message: 'Error al actualizar el resonador',
-        }
+    if (!resonatorData.id) {
+      throw new ORPCError('NOT_FOUND', {
+        message: 'Resonador no encontrado',
+      })
+    }
+
+    try {
+      await db
+        .update(resonatorsTable)
+        .set(resonatorData)
+        .where(eq(resonatorsTable.id, resonatorData.id))
+
+      return {
+        code: 'SUCCESS',
+        message: 'Resonador actualizado',
       }
-    }),
-
-  delete: protectedProcedure
-    .input(entityIdZod)
-    .handler(async ({ input }) => {
-      try {
-        const { id } = input
-
-        await deleteResonatorAssets(id)
-
-        await db.delete(resonatorsTable).where(eq(resonatorsTable.id, id))
-
-        await db
-          .delete(resonatorAssetsTable)
-          .where(eq(resonatorAssetsTable.resonator_id, id))
-
-        return {
-          code: 'SUCCESS',
-          message: 'Resonador eliminado',
-        }
-      } catch {
-        return {
-          code: 'ERROR',
-          message: 'Error al eliminar el resonador',
-        }
+    } catch {
+      return {
+        code: 'ERROR',
+        message: 'Error al actualizar el resonador',
       }
-    }),
+    }
+  }),
+
+  delete: protectedProcedure.input(entityIdZod).handler(async ({ input }) => {
+    try {
+      const { id } = input
+
+      await deleteResonatorAssets(id)
+
+      await db.delete(resonatorsTable).where(eq(resonatorsTable.id, id))
+
+      await db
+        .delete(resonatorAssetsTable)
+        .where(eq(resonatorAssetsTable.resonator_id, id))
+
+      return {
+        code: 'SUCCESS',
+        message: 'Resonador eliminado',
+      }
+    } catch {
+      return {
+        code: 'ERROR',
+        message: 'Error al eliminar el resonador',
+      }
+    }
+  }),
 }
