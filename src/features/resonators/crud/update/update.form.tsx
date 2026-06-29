@@ -9,7 +9,8 @@ import {
 } from '#/components/ui/dialog'
 import { useResonatorUpdate } from '#/features/resonators/crud/update'
 import { RiPencilAi2Fill } from '@remixicon/react'
-import { FieldsForm } from '../_form'
+import { Spinner } from '#/components/ui/spinner'
+import { FieldsForm } from '#/features/resonators/crud/_form'
 
 export function ResonatorUpdateForm() {
   const { form, formId, isPending, isOpen, setIsOpen } = useResonatorUpdate()
@@ -31,8 +32,9 @@ export function ResonatorUpdateForm() {
         <FieldsForm formId={formId} form={form} isPending={isPending} />
 
         <DialogFooter>
-          <Button type="submit" form={formId}>
-            Guardar
+          <Button type="submit" form={formId} disabled={isPending}>
+            {isPending && <Spinner />}
+            {isPending ? 'Guardando...' : 'Guardar'}
           </Button>
         </DialogFooter>
       </DialogContent>

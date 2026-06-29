@@ -7,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from '#/components/ui/card'
+import { Spinner } from '#/components/ui/spinner'
 import { useResonatorCreate } from '#/features/resonators/crud/create'
-import { FieldsForm } from '../_form'
+import { FieldsForm } from '#/features/resonators/crud/_form'
 
 export function ResonatorCreateForm() {
   const { form, formId, isPending } = useResonatorCreate()
@@ -23,8 +24,9 @@ export function ResonatorCreateForm() {
       </CardContent>
       <CardFooter>
         <CardAction>
-          <Button type="submit" form={formId}>
-            Guardar
+          <Button type="submit" form={formId} disabled={isPending}>
+            {isPending && <Spinner />}
+            {isPending ? 'Guardando...' : 'Guardar'}
           </Button>
         </CardAction>
       </CardFooter>
