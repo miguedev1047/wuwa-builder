@@ -1,0 +1,150 @@
+import { db } from '#/db'
+import { resonatorAssetsTable, resonatorsTable } from '#/db/schemas/resonators'
+import { entityIdZod } from '#/zod-schemas/general/entity-id'
+import { resonatorZod } from '#/zod-schemas/resonators/items'
+import { protectedProcedure, publicProcedure } from '@/integrations/orpc'
+import { ORPCError } from '@orpc/server'
+import { eq } from 'drizzle-orm'
+import { deleteResonatorAssets } from './__helpers'
+
+export const resonatorRouter = {
+  getAll: publicProcedure.handler(async () => {
+    try {
+      const resonators = await db.query.resonatorsTable.findMany({
+        with: {
+          assets: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          levels: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          sequences: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          skills: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          bonuses: true,
+        },
+      })
+      return resonators
+    } catch {
+      throw new ORPCError('INTERNAL_SERVER_ERROR', {
+        data: [],
+        message: 'Ha ocurrido un error al obtener los resonadores',
+      })
+    }
+  }),
+
+  getById: publicProcedure.input(entityIdZod).handler(async ({ input }) => {
+    const { id } = input
+    try {
+      const resonator = await db.query.resonatorsTable.findFirst({
+        where: (table, { eq: eqFn }) => eqFn(table.id, id),
+        with: {
+          assets: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          levels: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          sequences: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          skills: {
+            orderBy: (table, { asc }) => asc(table.order),
+          },
+          bonuses: true,
+        },
+      })
+
+      if (!resonator)
+        throw new ORPCError('NOT_FOUND', {
+          data: null,
+          message: 'Resonador no encontrado',
+        })
+
+      return resonator
+    } catch {
+      throw new ORPCError('INTERNAL_SERVER_ERROR', {
+        data: [],
+        message: 'Ha ocurrido un error al obtener los resonadores',
+      })
+    }
+  }),
+
+  create: protectedProcedure
+    .input(resonatorZod)
+    .handler(async ({ input }) => {
+      const { ...resonatorData } = input
+
+      try {
+        await db.insert(resonatorsTable).values(resonatorData)
+
+        return {
+          code: 'SUCCESS',
+          message: 'Resonador agregado',
+        }
+      } catch {
+        return {
+          code: 'ERROR',
+          message: 'Error al agregar el resonador',
+        }
+      }
+    }),
+
+  update: protectedProcedure
+    .input(resonatorZod)
+    .handler(async ({ input }) => {
+      const { ...resonatorData } = input
+
+      if (!resonatorData.id) {
+        throw new ORPCError('NOT_FOUND', {
+          message: 'Resonador no encontrado',
+        })
+      }
+
+      try {
+        await db
+          .update(resonatorsTable)
+          .set(resonatorData)
+          .where(eq(resonatorsTable.id, resonatorData.id))
+
+        return {
+          code: 'SUCCESS',
+          message: 'Resonador actualizado',
+        }
+      } catch {
+        return {
+          code: 'ERROR',
+          message: 'Error al actualizar el resonador',
+        }
+      }
+    }),
+
+  delete: protectedProcedure
+    .input(entityIdZod)
+    .handler(async ({ input }) => {
+      try {
+        const { id } = input
+
+        await deleteResonatorAssets(id)
+
+        await db.delete(resonatorsTable).where(eq(resonatorsTable.id, id))
+
+        await db
+          .delete(resonatorAssetsTable)
+          .where(eq(resonatorAssetsTable.resonator_id, id))
+
+        return {
+          code: 'SUCCESS',
+          message: 'Resonador eliminado',
+        }
+      } catch {
+        return {
+          code: 'ERROR',
+          message: 'Error al eliminar el resonador',
+        }
+      }
+    }),
+}
