@@ -16,6 +16,12 @@
 
 @import '@fontsource-variable/geist-mono';
 
+@import "tw-animate-css";
+
+@import "shadcn/tailwind.css";
+
+@import "@fontsource-variable/geist-mono";
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -55,6 +61,12 @@
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
+  --info: oklch(0.6 0.15 250);
+  --info-foreground: oklch(0.6 0.17 250);
+  --warning: oklch(0.7 0.15 80);
+  --warning-foreground: oklch(0.7 0.17 80);
+  --success: oklch(0.6 0.18 145);
+  --success-foreground: oklch(0.6 0.2 145);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -72,6 +84,15 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --fusion: oklch(55% 0.2 35);
+  --glacio: oklch(55% 0.15 235);
+  --aero: oklch(50% 0.14 185);
+  --electro: oklch(55% 0.16 285);
+  --spectro: oklch(55% 0.15 85);
+  --havoc: oklch(50% 0.18 310);
+
+  --selected: oklch(55% 0.15 85);
 }
 
 .dark {
@@ -111,6 +132,12 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.637 0.237 25.331);
+  --info: oklch(0.75 0.1 250);
+  --info-foreground: oklch(0.75 0.12 250);
+  --warning: oklch(0.85 0.12 80);
+  --warning-foreground: oklch(0.85 0.14 80);
+  --success: oklch(0.75 0.13 145);
+  --success-foreground: oklch(0.75 0.15 145);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -127,6 +154,15 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --fusion: oklch(80% 0.18 35);
+  --glacio: oklch(82% 0.12 235);
+  --aero: oklch(80% 0.12 185);
+  --electro: oklch(82% 0.14 285);
+  --spectro: oklch(85% 0.12 85);
+  --havoc: oklch(78% 0.15 310);
+
+  --selected: oklch(85% 0.12 85);
 }
 
 @theme inline {
@@ -147,6 +183,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -172,6 +214,15 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-aero: var(--aero);
+  --color-glacio: var(--glacio);
+  --color-fusion: var(--fusion);
+  --color-electro: var(--electro);
+  --color-spectro: var(--spectro);
+  --color-havoc: var(--havoc);
+
+  --color-selected: var(--selected);
 }
 
 @layer base {
@@ -185,5 +236,9 @@
   }
   html {
     @apply font-mono;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
   }
 }
