@@ -5,11 +5,11 @@ import {
 } from '@tanstack/react-router'
 import { TanstackAppDevTools } from '@/integrations/tanstack-query/devtools'
 import type { QueryClient } from '@tanstack/react-query'
-
-import appCss from '../styles/main.css?url'
 import { ThemeProvider } from '#/components/theme-provider'
 import { Toaster } from '#/components/ui/sonner'
 import { TooltipProvider } from '#/components/ui/tooltip'
+
+import appCss from '../styles/main.css?url'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -47,9 +47,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-          <TanstackAppDevTools />
-          <Toaster />
+          <TooltipProvider>
+            {children}
+            <TanstackAppDevTools />
+            <Toaster />
+          </TooltipProvider>
         </ThemeProvider>
         <Scripts />
       </body>
