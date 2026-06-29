@@ -10,19 +10,19 @@ export const imageUploadZodSchema = z.object({
     .mime(IMAGE_MIME_TYPES, {
       error: 'Solo se permiten imágenes PNG, JPEG o WEBP',
     }),
-  folderName: z
+  entityId: z
+    .string({
+      error: 'El ID de la entidad es requerido',
+    })
+    .min(1, {
+      error: 'El ID de la entidad no puede estar vacío',
+    }),
+  folder: z
     .string({
       error: 'El nombre de la carpeta es requerido',
     })
     .min(1, {
       error: 'El nombre de la carpeta no puede estar vacío',
-    }),
-  imageName: z
-    .string({
-      error: 'El nombre de la imagen es requerido',
-    })
-    .min(1, {
-      error: 'El nombre de la imagen no puede estar vacío',
     }),
   order: z
     .number({
