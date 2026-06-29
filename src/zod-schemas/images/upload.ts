@@ -17,6 +17,13 @@ export const imageUploadZodSchema = z.object({
     .min(1, {
       error: 'El ID de la entidad no puede estar vacío',
     }),
+  entityName: z
+    .string({
+      error: 'El nombre de la entidad es requerido',
+    })
+    .min(1, {
+      error: 'El nombre de la entidad no puede estar vacío',
+    }),
   folder: z
     .string({
       error: 'El nombre de la carpeta es requerido',
