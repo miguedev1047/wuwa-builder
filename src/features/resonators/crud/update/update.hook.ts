@@ -24,7 +24,9 @@ export function useResonatorUpdate() {
   })
 
   const { data: resonator } = useSuspenseQuery(
-    orpc.resonators.resonator.getById.queryOptions({ input: { id: resonatorId } }),
+    orpc.resonators.resonator.getById.queryOptions({
+      input: { id: resonatorId },
+    }),
   )
 
   const queryClient = useQueryClient()
@@ -70,5 +72,5 @@ export function useResonatorUpdate() {
 
   const isPending = mutation.isPending
 
-  return { form, formId, isPending, isOpen, setIsOpen }
+  return { form, formId, isPending, isOpen, setIsOpen, resonator }
 }

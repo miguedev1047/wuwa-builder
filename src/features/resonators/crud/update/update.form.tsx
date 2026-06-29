@@ -1,43 +1,25 @@
-import { Button } from '#/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '#/components/ui/dialog'
 import { useResonatorUpdate } from '#/features/resonators/crud/update'
-import { RiPencilAi2Fill } from '@remixicon/react'
-import { Spinner } from '#/components/ui/spinner'
 import { FieldsForm } from '#/features/resonators/crud/_form'
+import { DialogForm } from '#/components/dialog-form'
 
 export function ResonatorUpdateForm() {
-  const { form, formId, isPending, isOpen, setIsOpen } = useResonatorUpdate()
+  const { form, formId, isPending, isOpen, setIsOpen, resonator } =
+    useResonatorUpdate()
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger
-        render={
-          <Button size="icon" value="outline">
-            <RiPencilAi2Fill />
-          </Button>
-        }
-      />
-      <DialogContent className="sm:max-w-5xl">
-        <DialogHeader>
-          <DialogTitle>Actualizar del resonador</DialogTitle>
-        </DialogHeader>
-
-        <FieldsForm formId={formId} form={form} isPending={isPending} />
-
-        <DialogFooter>
-          <Button type="submit" form={formId} disabled={isPending}>
-            {isPending && <Spinner />}
-            {isPending ? 'Guardando...' : 'Guardar'}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <DialogForm
+      open={isOpen}
+      setIsOpen={setIsOpen}
+      title={`Resonador: ${resonator.name}`}
+      formId={formId}
+      isPending={isPending}
+      isEditing
+      onSubmit={(e) => {
+        e.preventDefault()
+        form.handleSubmit()
+      }}
+    >
+      <FieldsForm form={form} isPending={isPending} />
+    </DialogForm>
   )
 }
