@@ -5,8 +5,8 @@ import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
 import { DialogImage } from '#/features/resonators/id/info'
-import { ResonatorUpdateForm } from '../../crud/update'
-import { DeleteResonator } from '../delete'
+import { ResonatorUpdateForm } from '#/features/resonators/crud/update'
+import { DeleteResonator } from '#/features/resonators/crud/delete'
 
 export function InfoContent() {
   const { id } = useParams({ from: '/_protected/panel/(admin)/resonators/$id' })

@@ -1,11 +1,10 @@
-import { EntityDeleteItem } from '#/components/entity-delete-item'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-export function DeleteResonator() {
+export function useDeleteResonator() {
   const [isOpen, setIsOpen] = useState(false)
 
   const { id } = useParams({ from: '/_protected/panel/(admin)/resonators/$id' })
@@ -36,14 +35,5 @@ export function DeleteResonator() {
     mutation.mutate({ id })
   }
 
-  return (
-    <EntityDeleteItem
-      title="Eliminar resonador"
-      description="Al eliminar este resonador, esta acción es irreversible."
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-      onDelete={onDelete}
-      isPending={isPending}
-    />
-  )
+  return { isPending, onDelete, isOpen, setIsOpen }
 }
