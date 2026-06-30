@@ -7,14 +7,14 @@ import {
   ItemMedia,
   ItemTitle,
 } from '#/components/ui/item'
-import type { TResonatorAssetsTable } from '#/integrations/orpc/routers/resonators/__types'
+import type { TResonatorAssetTable } from '#/integrations/orpc/routers/resonators/__types'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiDeleteBin2Fill } from '@remixicon/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 interface ResonatorImageItemProps {
-  item: TResonatorAssetsTable
+  item: TResonatorAssetTable
   imageUrl: string
 }
 

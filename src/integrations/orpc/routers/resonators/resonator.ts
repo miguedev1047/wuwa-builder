@@ -1,19 +1,35 @@
 import { db } from '#/db'
-import { resonatorAssetsTable, resonatorsTable } from '#/db/schemas/resonators'
+import { resonatorAssetsTable, resonatorTable } from '#/db/schemas/resonators'
+import { deleteResonatorAssets } from '#/integrations/orpc/routers/resonators/__helpers'
 import { entityIdZod } from '#/zod-schemas/general/entity-id'
 import { resonatorZod } from '#/zod-schemas/resonators'
 import { protectedProcedure, publicProcedure } from '@/integrations/orpc'
 import { ORPCError } from '@orpc/server'
 import { eq } from 'drizzle-orm'
-import { deleteResonatorAssets } from './__helpers'
 
 export const resonatorRouter = {
   getAll: publicProcedure.handler(async () => {
     try {
-      const resonators = await db.query.resonatorsTable.findMany({
+      const resonators = await db.query.resonatorTable.findMany({
         with: {
           assets: {
             orderBy: (table, { asc }) => asc(table.order),
+          },
+          best_weapons: {
+            orderBy: (table, { asc }) => asc(table.order),
+            with: {
+              weapon: {
+                with: {
+                  assets: true,
+                  levels: true,
+                  refinaments: {
+                    with: {
+                      additional_stats: true,
+                    },
+                  },
+                },
+              },
+            },
           },
           levels: {
             orderBy: (table, { asc }) => asc(table.order),
@@ -39,11 +55,27 @@ export const resonatorRouter = {
   getById: publicProcedure.input(entityIdZod).handler(async ({ input }) => {
     const { id } = input
     try {
-      const resonator = await db.query.resonatorsTable.findFirst({
-        where: (table, { eq: eqFn }) => eqFn(table.id, id),
+      const resonator = await db.query.resonatorTable.findFirst({
+        where: (table, { eq: equals }) => equals(table.id, id),
         with: {
           assets: {
             orderBy: (table, { asc }) => asc(table.order),
+          },
+          best_weapons: {
+            orderBy: (table, { asc }) => asc(table.order),
+            with: {
+              weapon: {
+                with: {
+                  assets: true,
+                  levels: true,
+                  refinaments: {
+                    with: {
+                      additional_stats: true,
+                    },
+                  },
+                },
+              },
+            },
           },
           levels: {
             orderBy: (table, { asc }) => asc(table.order),
@@ -77,7 +109,7 @@ export const resonatorRouter = {
     const { ...resonatorData } = input
 
     try {
-      await db.insert(resonatorsTable).values(resonatorData)
+      await db.insert(resonatorTable).values(resonatorData)
 
       return {
         code: 'SUCCESS',
@@ -102,9 +134,9 @@ export const resonatorRouter = {
 
     try {
       await db
-        .update(resonatorsTable)
+        .update(resonatorTable)
         .set(resonatorData)
-        .where(eq(resonatorsTable.id, resonatorData.id))
+        .where(eq(resonatorTable.id, resonatorData.id))
 
       return {
         code: 'SUCCESS',
@@ -124,7 +156,7 @@ export const resonatorRouter = {
 
       await deleteResonatorAssets(id)
 
-      await db.delete(resonatorsTable).where(eq(resonatorsTable.id, id))
+      await db.delete(resonatorTable).where(eq(resonatorTable.id, id))
 
       await db
         .delete(resonatorAssetsTable)
