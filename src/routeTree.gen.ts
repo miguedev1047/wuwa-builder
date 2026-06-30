@@ -19,7 +19,10 @@ import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 import { Route as ApiContentSearchRouteImport } from './routes/api/content/search'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ProtectedPanelguestMyRosterIndexRouteImport } from './routes/_protected/panel/(guest)/my-roster/index'
+import { Route as ProtectedPaneladminWeaponsIndexRouteImport } from './routes/_protected/panel/(admin)/weapons/index'
 import { Route as ProtectedPaneladminResonatorsIndexRouteImport } from './routes/_protected/panel/(admin)/resonators/index'
+import { Route as ProtectedPaneladminWeaponsCreateRouteImport } from './routes/_protected/panel/(admin)/weapons/create'
+import { Route as ProtectedPaneladminWeaponsIdRouteImport } from './routes/_protected/panel/(admin)/weapons/$id'
 import { Route as ProtectedPaneladminResonatorsCreateRouteImport } from './routes/_protected/panel/(admin)/resonators/create'
 import { Route as ProtectedPaneladminResonatorsIdRouteImport } from './routes/_protected/panel/(admin)/resonators/$id'
 
@@ -73,10 +76,28 @@ const ProtectedPanelguestMyRosterIndexRoute =
     path: '/panel/my-roster/',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
+const ProtectedPaneladminWeaponsIndexRoute =
+  ProtectedPaneladminWeaponsIndexRouteImport.update({
+    id: '/panel/(admin)/weapons/',
+    path: '/panel/weapons/',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 const ProtectedPaneladminResonatorsIndexRoute =
   ProtectedPaneladminResonatorsIndexRouteImport.update({
     id: '/panel/(admin)/resonators/',
     path: '/panel/resonators/',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedPaneladminWeaponsCreateRoute =
+  ProtectedPaneladminWeaponsCreateRouteImport.update({
+    id: '/panel/(admin)/weapons/create',
+    path: '/panel/weapons/create',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedPaneladminWeaponsIdRoute =
+  ProtectedPaneladminWeaponsIdRouteImport.update({
+    id: '/panel/(admin)/weapons/$id',
+    path: '/panel/weapons/$id',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
 const ProtectedPaneladminResonatorsCreateRoute =
@@ -103,7 +124,10 @@ export interface FileRoutesByFullPath {
   '/auth/login/': typeof AuthLoginIndexRoute
   '/panel/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/panel/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
+  '/panel/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
+  '/panel/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
   '/panel/resonators/': typeof ProtectedPaneladminResonatorsIndexRoute
+  '/panel/weapons/': typeof ProtectedPaneladminWeaponsIndexRoute
   '/panel/my-roster/': typeof ProtectedPanelguestMyRosterIndexRoute
 }
 export interface FileRoutesByTo {
@@ -117,7 +141,10 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginIndexRoute
   '/panel/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/panel/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
+  '/panel/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
+  '/panel/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
   '/panel/resonators': typeof ProtectedPaneladminResonatorsIndexRoute
+  '/panel/weapons': typeof ProtectedPaneladminWeaponsIndexRoute
   '/panel/my-roster': typeof ProtectedPanelguestMyRosterIndexRoute
 }
 export interface FileRoutesById {
@@ -133,7 +160,10 @@ export interface FileRoutesById {
   '/auth/login/': typeof AuthLoginIndexRoute
   '/_protected/panel/(admin)/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/_protected/panel/(admin)/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
+  '/_protected/panel/(admin)/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
+  '/_protected/panel/(admin)/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
   '/_protected/panel/(admin)/resonators/': typeof ProtectedPaneladminResonatorsIndexRoute
+  '/_protected/panel/(admin)/weapons/': typeof ProtectedPaneladminWeaponsIndexRoute
   '/_protected/panel/(guest)/my-roster/': typeof ProtectedPanelguestMyRosterIndexRoute
 }
 export interface FileRouteTypes {
@@ -149,7 +179,10 @@ export interface FileRouteTypes {
     | '/auth/login/'
     | '/panel/resonators/$id'
     | '/panel/resonators/create'
+    | '/panel/weapons/$id'
+    | '/panel/weapons/create'
     | '/panel/resonators/'
+    | '/panel/weapons/'
     | '/panel/my-roster/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -163,7 +196,10 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/panel/resonators/$id'
     | '/panel/resonators/create'
+    | '/panel/weapons/$id'
+    | '/panel/weapons/create'
     | '/panel/resonators'
+    | '/panel/weapons'
     | '/panel/my-roster'
   id:
     | '__root__'
@@ -178,7 +214,10 @@ export interface FileRouteTypes {
     | '/auth/login/'
     | '/_protected/panel/(admin)/resonators/$id'
     | '/_protected/panel/(admin)/resonators/create'
+    | '/_protected/panel/(admin)/weapons/$id'
+    | '/_protected/panel/(admin)/weapons/create'
     | '/_protected/panel/(admin)/resonators/'
+    | '/_protected/panel/(admin)/weapons/'
     | '/_protected/panel/(guest)/my-roster/'
   fileRoutesById: FileRoutesById
 }
@@ -263,11 +302,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedPanelguestMyRosterIndexRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/panel/(admin)/weapons/': {
+      id: '/_protected/panel/(admin)/weapons/'
+      path: '/panel/weapons'
+      fullPath: '/panel/weapons/'
+      preLoaderRoute: typeof ProtectedPaneladminWeaponsIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_protected/panel/(admin)/resonators/': {
       id: '/_protected/panel/(admin)/resonators/'
       path: '/panel/resonators'
       fullPath: '/panel/resonators/'
       preLoaderRoute: typeof ProtectedPaneladminResonatorsIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/panel/(admin)/weapons/create': {
+      id: '/_protected/panel/(admin)/weapons/create'
+      path: '/panel/weapons/create'
+      fullPath: '/panel/weapons/create'
+      preLoaderRoute: typeof ProtectedPaneladminWeaponsCreateRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/panel/(admin)/weapons/$id': {
+      id: '/_protected/panel/(admin)/weapons/$id'
+      path: '/panel/weapons/$id'
+      fullPath: '/panel/weapons/$id'
+      preLoaderRoute: typeof ProtectedPaneladminWeaponsIdRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
     '/_protected/panel/(admin)/resonators/create': {
@@ -291,7 +351,10 @@ interface ProtectedRouteRouteChildren {
   ProtectedPanelIndexRoute: typeof ProtectedPanelIndexRoute
   ProtectedPaneladminResonatorsIdRoute: typeof ProtectedPaneladminResonatorsIdRoute
   ProtectedPaneladminResonatorsCreateRoute: typeof ProtectedPaneladminResonatorsCreateRoute
+  ProtectedPaneladminWeaponsIdRoute: typeof ProtectedPaneladminWeaponsIdRoute
+  ProtectedPaneladminWeaponsCreateRoute: typeof ProtectedPaneladminWeaponsCreateRoute
   ProtectedPaneladminResonatorsIndexRoute: typeof ProtectedPaneladminResonatorsIndexRoute
+  ProtectedPaneladminWeaponsIndexRoute: typeof ProtectedPaneladminWeaponsIndexRoute
   ProtectedPanelguestMyRosterIndexRoute: typeof ProtectedPanelguestMyRosterIndexRoute
 }
 
@@ -300,8 +363,11 @@ const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
   ProtectedPaneladminResonatorsIdRoute: ProtectedPaneladminResonatorsIdRoute,
   ProtectedPaneladminResonatorsCreateRoute:
     ProtectedPaneladminResonatorsCreateRoute,
+  ProtectedPaneladminWeaponsIdRoute: ProtectedPaneladminWeaponsIdRoute,
+  ProtectedPaneladminWeaponsCreateRoute: ProtectedPaneladminWeaponsCreateRoute,
   ProtectedPaneladminResonatorsIndexRoute:
     ProtectedPaneladminResonatorsIndexRoute,
+  ProtectedPaneladminWeaponsIndexRoute: ProtectedPaneladminWeaponsIndexRoute,
   ProtectedPanelguestMyRosterIndexRoute: ProtectedPanelguestMyRosterIndexRoute,
 }
 
