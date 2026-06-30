@@ -29,7 +29,7 @@ export function EntityViewList<T>({
       <EntityEmpty
         title={emptyContent.title}
         description={emptyContent.description}
-        className="col-span-full h-120"
+        className="col-span-full h-80"
       />
     )
   }

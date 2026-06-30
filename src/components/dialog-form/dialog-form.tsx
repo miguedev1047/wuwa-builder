@@ -10,6 +10,8 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog'
 import { Spinner } from '#/components/ui/spinner'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '#/lib/utils'
 
 interface DialogFormProps {
   isEditing?: boolean
@@ -23,6 +25,19 @@ interface DialogFormProps {
   onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void
 }
 
+const dialogFormVariants = cva('', {
+  variants: {
+    size: {
+      default: 'sm:max-w-5xl!',
+      md: 'sm:max-w-3xl!',
+      sm: 'sm:max-w-xl!',
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+  },
+})
+
 export function DialogForm({
   children,
   formId,
@@ -32,8 +47,9 @@ export function DialogForm({
   title,
   disabled,
   isEditing,
+  size,
   isPending = false,
-}: DialogFormProps) {
+}: DialogFormProps & VariantProps<typeof dialogFormVariants>) {
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
       <DialogTrigger
@@ -43,7 +59,7 @@ export function DialogForm({
           </Button>
         }
       />
-      <DialogContent className="sm:max-w-5xl!">
+      <DialogContent className={cn(dialogFormVariants({ size }))}>
         <DialogHeader>
           <DialogTitle>
             {isEditing ? 'Editar' : 'Agregar'} {title}

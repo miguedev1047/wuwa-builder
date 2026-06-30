@@ -18,8 +18,9 @@ interface EntityDeleteItemProps {
   title: string
   description?: string
   onDelete: () => void
-  isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
+  type?: 'button' | 'dialog'
+  isOpen?: boolean
+  setIsOpen?: (isOpen: boolean) => void
   IconComponent?: RemixiconComponentType
   isPending?: boolean
 }
@@ -28,11 +29,25 @@ export function EntityDeleteItem({
   title,
   description,
   onDelete,
+  type = 'dialog',
   isOpen,
   setIsOpen,
   isPending = false,
   IconComponent = RiDeleteBin2Fill,
 }: EntityDeleteItemProps) {
+  if (type === 'button') {
+    return (
+      <Button
+        variant="destructive"
+        size="icon"
+        disabled={isPending}
+        onClick={onDelete}
+      >
+        <IconComponent />
+      </Button>
+    )
+  }
+
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger
