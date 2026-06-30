@@ -22,7 +22,7 @@ function RouteComponent() {
         />
         <Button
           nativeButton={false}
-          render={<Link to="/panel/my-roster">Ecos</Link>}
+          render={<Link to="/panel/echoes">Ecos</Link>}
         />
         <Button
           nativeButton={false}
