@@ -16,6 +16,18 @@ function RouteComponent() {
           nativeButton={false}
           render={<Link to="/panel/resonators">Resonadores</Link>}
         />
+        <Button
+          nativeButton={false}
+          render={<Link to="/panel/weapons">Armas</Link>}
+        />
+        <Button
+          nativeButton={false}
+          render={<Link to="/panel/my-roster">Ecos</Link>}
+        />
+        <Button
+          nativeButton={false}
+          render={<Link to="/panel/my-roster">Materiales</Link>}
+        />
       </div>
 
       <SignOutButton />
