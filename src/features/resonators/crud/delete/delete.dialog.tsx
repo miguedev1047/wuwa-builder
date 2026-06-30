@@ -1,8 +1,8 @@
 import { EntityDeleteItem } from '#/components/entity-delete-item'
-import { useDeleteResonator } from '#/features/resonators/crud/delete'
+import { useResonatorDelete } from '#/features/resonators/crud/delete'
 
 export function DeleteResonator() {
-  const { isOpen, isPending, onDelete, setIsOpen } = useDeleteResonator()
+  const { isOpen, isPending, onDelete, setIsOpen } = useResonatorDelete()
 
   return (
     <EntityDeleteItem

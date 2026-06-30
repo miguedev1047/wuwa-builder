@@ -4,7 +4,7 @@ import { useNavigate, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-export function useDeleteResonator() {
+export function useResonatorDelete() {
   const [isOpen, setIsOpen] = useState(false)
 
   const { id } = useParams({ from: '/_protected/panel/(admin)/resonators/$id' })
