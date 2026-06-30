@@ -5,7 +5,7 @@ import {
   text,
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
-import { resonatorsTable } from '#/db/schemas/resonators/items'
+import { resonatorTable } from '#/db/schemas/resonators/items'
 import { sql } from 'drizzle-orm'
 
 export const resonatorLevelsTable = sqliteTable(
@@ -16,7 +16,7 @@ export const resonatorLevelsTable = sqliteTable(
       .$default(() => createId()),
     resonator_id: text('resonator_id')
       .notNull()
-      .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+      .references(() => resonatorTable.id, { onDelete: 'cascade' }),
     level_value: text('level_value').notNull(),
     atk: integer('atk').notNull(),
     hp: integer('hp').notNull(),

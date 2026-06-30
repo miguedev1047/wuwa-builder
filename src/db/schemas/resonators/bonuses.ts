@@ -8,7 +8,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { createId } from '@paralleldrive/cuid2'
-import { resonatorsTable } from '#/db/schemas/resonators/items'
+import { resonatorTable } from '#/db/schemas/resonators/items'
 import type { TiptapNodeProps } from '#/zod-schemas/general/tiptap-node'
 
 export const resonatorBonusesTable = sqliteTable('resonator_bonuses', {
@@ -17,7 +17,7 @@ export const resonatorBonusesTable = sqliteTable('resonator_bonuses', {
     .$default(() => createId()),
   resonator_id: text('resonator_id')
     .notNull()
-    .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+    .references(() => resonatorTable.id, { onDelete: 'cascade' }),
   bonus_type: text('bonus_type').notNull(),
   bonus_value: text('bonus_value').notNull(),
   bonus_value_number: real('bonus_value_number').notNull(),

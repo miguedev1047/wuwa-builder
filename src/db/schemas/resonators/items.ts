@@ -9,7 +9,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 
-export const resonatorsTable = sqliteTable('resonators', {
+export const resonatorTable = sqliteTable('resonators', {
   id: text('id')
     .primaryKey()
     .$default(() => createId()),
@@ -39,7 +39,7 @@ export const resonatorAssetsTable = sqliteTable(
 
     resonator_id: text('resonator_id')
       .notNull()
-      .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+      .references(() => resonatorTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
     uniqueIndex('resonator_assets_unique').on(table.resonator_id, table.order),

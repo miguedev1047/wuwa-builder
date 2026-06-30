@@ -1,7 +1,8 @@
 import { relations } from 'drizzle-orm'
+import { weaponTable } from '#/db/schemas/weapons/items'
 import {
   resonatorAssetsTable,
-  resonatorsTable,
+  resonatorTable,
 } from '#/db/schemas/resonators/items'
 import {
   resonatorSkillsTable,
@@ -16,9 +17,11 @@ import {
   resonatorBonusAssetsTable,
 } from '#/db/schemas/resonators/bonuses'
 import { resonatorLevelsTable } from '#/db/schemas/resonators/levels'
+import { resonatorBestWeaponsTable } from '#/db/schemas/resonators/best-weapons'
 
-export const resonatorRelations = relations(resonatorsTable, ({ many }) => ({
+export const resonatorRelations = relations(resonatorTable, ({ many }) => ({
   assets: many(resonatorAssetsTable),
+  best_weapons: many(resonatorBestWeaponsTable),
   levels: many(resonatorLevelsTable),
   skills: many(resonatorSkillsTable),
   sequences: many(resonatorSequencesTable),
@@ -28,9 +31,23 @@ export const resonatorRelations = relations(resonatorsTable, ({ many }) => ({
 export const resonatorAssetsRelations = relations(
   resonatorAssetsTable,
   ({ one }) => ({
-    resonator: one(resonatorsTable, {
+    resonator: one(resonatorTable, {
       fields: [resonatorAssetsTable.resonator_id],
-      references: [resonatorsTable.id],
+      references: [resonatorTable.id],
+    }),
+  }),
+)
+
+export const resonatorBestWeaponsRelations = relations(
+  resonatorBestWeaponsTable,
+  ({ one }) => ({
+    resonator: one(resonatorTable, {
+      fields: [resonatorBestWeaponsTable.resonator_id],
+      references: [resonatorTable.id],
+    }),
+    weapon: one(weaponTable, {
+      fields: [resonatorBestWeaponsTable.weapon_id],
+      references: [weaponTable.id],
     }),
   }),
 )
@@ -38,9 +55,9 @@ export const resonatorAssetsRelations = relations(
 export const resonatorLevelRelations = relations(
   resonatorLevelsTable,
   ({ one }) => ({
-    resonator: one(resonatorsTable, {
+    resonator: one(resonatorTable, {
       fields: [resonatorLevelsTable.resonator_id],
-      references: [resonatorsTable.id],
+      references: [resonatorTable.id],
     }),
   }),
 )
@@ -48,9 +65,9 @@ export const resonatorLevelRelations = relations(
 export const resonatorSkillsRelations = relations(
   resonatorSkillsTable,
   ({ one, many }) => ({
-    resonator: one(resonatorsTable, {
+    resonator: one(resonatorTable, {
       fields: [resonatorSkillsTable.resonator_id],
-      references: [resonatorsTable.id],
+      references: [resonatorTable.id],
     }),
     assets: many(resonatorSkillsAssetsTable),
   }),
@@ -69,9 +86,9 @@ export const resonatorSkillsAssetsRelations = relations(
 export const resonatorSequencesRelations = relations(
   resonatorSequencesTable,
   ({ one, many }) => ({
-    resonator: one(resonatorsTable, {
+    resonator: one(resonatorTable, {
       fields: [resonatorSequencesTable.resonator_id],
-      references: [resonatorsTable.id],
+      references: [resonatorTable.id],
     }),
     assets: many(resonatorSequencesAssetsTable),
   }),
@@ -90,9 +107,9 @@ export const resonatorSequencesAssetsRelations = relations(
 export const resonatorBonusesRelations = relations(
   resonatorBonusesTable,
   ({ one, many }) => ({
-    resonator: one(resonatorsTable, {
+    resonator: one(resonatorTable, {
       fields: [resonatorBonusesTable.resonator_id],
-      references: [resonatorsTable.id],
+      references: [resonatorTable.id],
     }),
     assets: many(resonatorBonusAssetsTable),
   }),

@@ -7,7 +7,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { createId } from '@paralleldrive/cuid2'
-import { resonatorsTable } from '#/db/schemas/resonators/items'
+import { resonatorTable } from '#/db/schemas/resonators/items'
 import type { TiptapNodeProps } from '#/zod-schemas/general/tiptap-node'
 
 export const resonatorSkillsTable = sqliteTable(
@@ -18,7 +18,7 @@ export const resonatorSkillsTable = sqliteTable(
       .$default(() => createId()),
     resonator_id: text('resonator_id')
       .notNull()
-      .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+      .references(() => resonatorTable.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
     image_url: text('image_url').notNull(),
     description: text('description', { mode: 'json' })
@@ -52,6 +52,9 @@ export const resonatorSkillsAssetsTable = sqliteTable(
       .references(() => resonatorSkillsTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
-    uniqueIndex('resonator_skills_assets_unique').on(table.resonator_id, table.order),
+    uniqueIndex('resonator_skills_assets_unique').on(
+      table.resonator_id,
+      table.order,
+    ),
   ],
 )

@@ -7,7 +7,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { createId } from '@paralleldrive/cuid2'
-import { resonatorsTable } from '#/db/schemas/resonators/items'
+import { resonatorTable } from '#/db/schemas/resonators/items'
 
 export const resonatorSequencesTable = sqliteTable(
   'resonator_sequences',
@@ -21,7 +21,7 @@ export const resonatorSequencesTable = sqliteTable(
     order: integer('order').notNull(),
     resonator_id: text('resonator_id')
       .notNull()
-      .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+      .references(() => resonatorTable.id, { onDelete: 'cascade' }),
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
       .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
       .notNull(),
@@ -48,6 +48,9 @@ export const resonatorSequencesAssetsTable = sqliteTable(
       .references(() => resonatorSequencesTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
-    uniqueIndex('resonator_sequences_assets_unique').on(table.resonator_id, table.order),
+    uniqueIndex('resonator_sequences_assets_unique').on(
+      table.resonator_id,
+      table.order,
+    ),
   ],
 )

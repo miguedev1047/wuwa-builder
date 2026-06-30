@@ -6,7 +6,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
-import { resonatorsTable } from '#/db/schemas/resonators/items'
+import { resonatorTable } from '#/db/schemas/resonators/items'
 import { weaponTable } from '#/db/schemas/weapons'
 
 export const resonatorBestWeaponsTable = sqliteTable(
@@ -17,7 +17,7 @@ export const resonatorBestWeaponsTable = sqliteTable(
       .$default(() => createId()),
     resonator_id: text('resonator_id')
       .notNull()
-      .references(() => resonatorsTable.id, { onDelete: 'cascade' }),
+      .references(() => resonatorTable.id, { onDelete: 'cascade' }),
     weapon_id: text('weapon_id')
       .notNull()
       .references(() => weaponTable.id, { onDelete: 'cascade' }),
