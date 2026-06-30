@@ -86,7 +86,6 @@ export const resonatorRouter = {
           skills: {
             orderBy: (table, { asc }) => asc(table.order),
           },
-          best_weapons: true,
           bonuses: true,
         },
       })
