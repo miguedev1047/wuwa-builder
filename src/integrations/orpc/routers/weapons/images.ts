@@ -17,13 +17,16 @@ export const imagesRouter = {
       try {
         const ext = file.name.split('.').pop() ?? 'webp'
 
+        const lowercaseName = entityName.toLowerCase()
+        const compactName = lowercaseName.replaceAll(' ', '-')
+
         const [assetCreated] = await db
           .insert(weaponAssetsTable)
           .values({ weapon_id: entityId, key: 'none', order })
           .returning({ id: weaponAssetsTable.id })
 
         const assetId = assetCreated.id
-        const key = `${folder}/${entityId}/${entityName}-${assetId}.${ext}`
+        const key = `${folder}/${entityId}/${compactName}-${assetId}.${ext}`
 
         const buffer = await file.arrayBuffer()
         await env.wuwa_builds_storage.put(key, buffer, {
