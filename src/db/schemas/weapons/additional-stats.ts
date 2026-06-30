@@ -6,7 +6,7 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core'
 import { weaponTable } from '#/db/schemas/weapons/items'
-import { weaponsRefinamentsTable } from '#/db/schemas/weapons/refinaments'
+import { weaponRefinamentsTable } from '#/db/schemas/weapons/refinaments'
 import { sql } from 'drizzle-orm'
 
 export const weaponAdditionalStatsTable = sqliteTable(
@@ -19,7 +19,7 @@ export const weaponAdditionalStatsTable = sqliteTable(
       .notNull()
       .references(() => weaponTable.id, { onDelete: 'cascade' }),
     refinament_id: text('refinament_id').references(
-      () => weaponsRefinamentsTable.id,
+      () => weaponRefinamentsTable.id,
       { onDelete: 'cascade' },
     ),
     stat_value: text('stat_value').notNull(),

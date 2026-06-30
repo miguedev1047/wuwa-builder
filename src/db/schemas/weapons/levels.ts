@@ -3,7 +3,7 @@ import { weaponTable } from '#/db/schemas/weapons/items'
 import { createId } from '@paralleldrive/cuid2'
 import { sql } from 'drizzle-orm'
 
-export const weaponLevels = sqliteTable('weapon_levels', {
+export const weaponLevelsTable = sqliteTable('weapon_levels', {
   id: text('id')
     .primaryKey()
     .$default(() => createId()),

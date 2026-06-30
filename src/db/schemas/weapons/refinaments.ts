@@ -9,7 +9,7 @@ import {
 import { weaponTable } from '#/db/schemas/weapons/items'
 import { createId } from '@paralleldrive/cuid2'
 
-export const weaponsRefinamentsTable = sqliteTable(
+export const weaponRefinamentsTable = sqliteTable(
   'weapons_refinaments',
   {
     id: text('id')
