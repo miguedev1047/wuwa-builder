@@ -27,7 +27,7 @@ export const FieldsForm = withForm({
   props: {} as { isPending: boolean },
   render: function Render({ form, isPending }) {
     return (
-      <FieldGroup>
+      <FieldGroup className="md:gap-2">
         <form.Field
           name="name"
           children={(field) => {
@@ -182,7 +182,7 @@ export const FieldsForm = withForm({
           }}
         />
 
-        <div className="grid grid-cols-2 gap-4 col-span-2">
+        <div className="grid md:grid-cols-2 gap-2 md:gap-4 col-span-2">
           <form.Field
             name="is_new"
             children={(field) => {
