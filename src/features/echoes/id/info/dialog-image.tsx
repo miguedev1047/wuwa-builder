@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog'
 import { RiUploadCloud2Fill } from '@remixicon/react'
-import { WeaponImageUpload } from '#/features/weapons/id/images'
+import { EchoImageUpload } from '#/features/echoes/id/images'
 import {
   Tooltip,
   TooltipContent,
@@ -36,7 +36,7 @@ export function DialogImage() {
             <DialogTitle>Subir imagenes</DialogTitle>
           </DialogHeader>
 
-          <WeaponImageUpload />
+          <EchoImageUpload />
 
           <DialogFooter>
             <DialogClose render={<Button>Cerrar</Button>} />

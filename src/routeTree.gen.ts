@@ -21,10 +21,13 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ProtectedPanelguestMyRosterIndexRouteImport } from './routes/_protected/panel/(guest)/my-roster/index'
 import { Route as ProtectedPaneladminWeaponsIndexRouteImport } from './routes/_protected/panel/(admin)/weapons/index'
 import { Route as ProtectedPaneladminResonatorsIndexRouteImport } from './routes/_protected/panel/(admin)/resonators/index'
+import { Route as ProtectedPaneladminEchoesIndexRouteImport } from './routes/_protected/panel/(admin)/echoes/index'
 import { Route as ProtectedPaneladminWeaponsCreateRouteImport } from './routes/_protected/panel/(admin)/weapons/create'
 import { Route as ProtectedPaneladminWeaponsIdRouteImport } from './routes/_protected/panel/(admin)/weapons/$id'
 import { Route as ProtectedPaneladminResonatorsCreateRouteImport } from './routes/_protected/panel/(admin)/resonators/create'
 import { Route as ProtectedPaneladminResonatorsIdRouteImport } from './routes/_protected/panel/(admin)/resonators/$id'
+import { Route as ProtectedPaneladminEchoesCreateRouteImport } from './routes/_protected/panel/(admin)/echoes/create'
+import { Route as ProtectedPaneladminEchoesIdRouteImport } from './routes/_protected/panel/(admin)/echoes/$id'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -88,6 +91,12 @@ const ProtectedPaneladminResonatorsIndexRoute =
     path: '/panel/resonators/',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
+const ProtectedPaneladminEchoesIndexRoute =
+  ProtectedPaneladminEchoesIndexRouteImport.update({
+    id: '/panel/(admin)/echoes/',
+    path: '/panel/echoes/',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 const ProtectedPaneladminWeaponsCreateRoute =
   ProtectedPaneladminWeaponsCreateRouteImport.update({
     id: '/panel/(admin)/weapons/create',
@@ -112,6 +121,18 @@ const ProtectedPaneladminResonatorsIdRoute =
     path: '/panel/resonators/$id',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
+const ProtectedPaneladminEchoesCreateRoute =
+  ProtectedPaneladminEchoesCreateRouteImport.update({
+    id: '/panel/(admin)/echoes/create',
+    path: '/panel/echoes/create',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedPaneladminEchoesIdRoute =
+  ProtectedPaneladminEchoesIdRouteImport.update({
+    id: '/panel/(admin)/echoes/$id',
+    path: '/panel/echoes/$id',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof homeIndexRoute
@@ -122,10 +143,13 @@ export interface FileRoutesByFullPath {
   '/panel/': typeof ProtectedPanelIndexRoute
   '/auth/error/': typeof AuthErrorIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
+  '/panel/echoes/$id': typeof ProtectedPaneladminEchoesIdRoute
+  '/panel/echoes/create': typeof ProtectedPaneladminEchoesCreateRoute
   '/panel/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/panel/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
   '/panel/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
   '/panel/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
+  '/panel/echoes/': typeof ProtectedPaneladminEchoesIndexRoute
   '/panel/resonators/': typeof ProtectedPaneladminResonatorsIndexRoute
   '/panel/weapons/': typeof ProtectedPaneladminWeaponsIndexRoute
   '/panel/my-roster/': typeof ProtectedPanelguestMyRosterIndexRoute
@@ -139,10 +163,13 @@ export interface FileRoutesByTo {
   '/panel': typeof ProtectedPanelIndexRoute
   '/auth/error': typeof AuthErrorIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
+  '/panel/echoes/$id': typeof ProtectedPaneladminEchoesIdRoute
+  '/panel/echoes/create': typeof ProtectedPaneladminEchoesCreateRoute
   '/panel/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/panel/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
   '/panel/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
   '/panel/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
+  '/panel/echoes': typeof ProtectedPaneladminEchoesIndexRoute
   '/panel/resonators': typeof ProtectedPaneladminResonatorsIndexRoute
   '/panel/weapons': typeof ProtectedPaneladminWeaponsIndexRoute
   '/panel/my-roster': typeof ProtectedPanelguestMyRosterIndexRoute
@@ -158,10 +185,13 @@ export interface FileRoutesById {
   '/_protected/panel/': typeof ProtectedPanelIndexRoute
   '/auth/error/': typeof AuthErrorIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
+  '/_protected/panel/(admin)/echoes/$id': typeof ProtectedPaneladminEchoesIdRoute
+  '/_protected/panel/(admin)/echoes/create': typeof ProtectedPaneladminEchoesCreateRoute
   '/_protected/panel/(admin)/resonators/$id': typeof ProtectedPaneladminResonatorsIdRoute
   '/_protected/panel/(admin)/resonators/create': typeof ProtectedPaneladminResonatorsCreateRoute
   '/_protected/panel/(admin)/weapons/$id': typeof ProtectedPaneladminWeaponsIdRoute
   '/_protected/panel/(admin)/weapons/create': typeof ProtectedPaneladminWeaponsCreateRoute
+  '/_protected/panel/(admin)/echoes/': typeof ProtectedPaneladminEchoesIndexRoute
   '/_protected/panel/(admin)/resonators/': typeof ProtectedPaneladminResonatorsIndexRoute
   '/_protected/panel/(admin)/weapons/': typeof ProtectedPaneladminWeaponsIndexRoute
   '/_protected/panel/(guest)/my-roster/': typeof ProtectedPanelguestMyRosterIndexRoute
@@ -177,10 +207,13 @@ export interface FileRouteTypes {
     | '/panel/'
     | '/auth/error/'
     | '/auth/login/'
+    | '/panel/echoes/$id'
+    | '/panel/echoes/create'
     | '/panel/resonators/$id'
     | '/panel/resonators/create'
     | '/panel/weapons/$id'
     | '/panel/weapons/create'
+    | '/panel/echoes/'
     | '/panel/resonators/'
     | '/panel/weapons/'
     | '/panel/my-roster/'
@@ -194,10 +227,13 @@ export interface FileRouteTypes {
     | '/panel'
     | '/auth/error'
     | '/auth/login'
+    | '/panel/echoes/$id'
+    | '/panel/echoes/create'
     | '/panel/resonators/$id'
     | '/panel/resonators/create'
     | '/panel/weapons/$id'
     | '/panel/weapons/create'
+    | '/panel/echoes'
     | '/panel/resonators'
     | '/panel/weapons'
     | '/panel/my-roster'
@@ -212,10 +248,13 @@ export interface FileRouteTypes {
     | '/_protected/panel/'
     | '/auth/error/'
     | '/auth/login/'
+    | '/_protected/panel/(admin)/echoes/$id'
+    | '/_protected/panel/(admin)/echoes/create'
     | '/_protected/panel/(admin)/resonators/$id'
     | '/_protected/panel/(admin)/resonators/create'
     | '/_protected/panel/(admin)/weapons/$id'
     | '/_protected/panel/(admin)/weapons/create'
+    | '/_protected/panel/(admin)/echoes/'
     | '/_protected/panel/(admin)/resonators/'
     | '/_protected/panel/(admin)/weapons/'
     | '/_protected/panel/(guest)/my-roster/'
@@ -316,6 +355,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedPaneladminResonatorsIndexRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/panel/(admin)/echoes/': {
+      id: '/_protected/panel/(admin)/echoes/'
+      path: '/panel/echoes'
+      fullPath: '/panel/echoes/'
+      preLoaderRoute: typeof ProtectedPaneladminEchoesIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_protected/panel/(admin)/weapons/create': {
       id: '/_protected/panel/(admin)/weapons/create'
       path: '/panel/weapons/create'
@@ -344,15 +390,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedPaneladminResonatorsIdRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/panel/(admin)/echoes/create': {
+      id: '/_protected/panel/(admin)/echoes/create'
+      path: '/panel/echoes/create'
+      fullPath: '/panel/echoes/create'
+      preLoaderRoute: typeof ProtectedPaneladminEchoesCreateRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/panel/(admin)/echoes/$id': {
+      id: '/_protected/panel/(admin)/echoes/$id'
+      path: '/panel/echoes/$id'
+      fullPath: '/panel/echoes/$id'
+      preLoaderRoute: typeof ProtectedPaneladminEchoesIdRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
   }
 }
 
 interface ProtectedRouteRouteChildren {
   ProtectedPanelIndexRoute: typeof ProtectedPanelIndexRoute
+  ProtectedPaneladminEchoesIdRoute: typeof ProtectedPaneladminEchoesIdRoute
+  ProtectedPaneladminEchoesCreateRoute: typeof ProtectedPaneladminEchoesCreateRoute
   ProtectedPaneladminResonatorsIdRoute: typeof ProtectedPaneladminResonatorsIdRoute
   ProtectedPaneladminResonatorsCreateRoute: typeof ProtectedPaneladminResonatorsCreateRoute
   ProtectedPaneladminWeaponsIdRoute: typeof ProtectedPaneladminWeaponsIdRoute
   ProtectedPaneladminWeaponsCreateRoute: typeof ProtectedPaneladminWeaponsCreateRoute
+  ProtectedPaneladminEchoesIndexRoute: typeof ProtectedPaneladminEchoesIndexRoute
   ProtectedPaneladminResonatorsIndexRoute: typeof ProtectedPaneladminResonatorsIndexRoute
   ProtectedPaneladminWeaponsIndexRoute: typeof ProtectedPaneladminWeaponsIndexRoute
   ProtectedPanelguestMyRosterIndexRoute: typeof ProtectedPanelguestMyRosterIndexRoute
@@ -360,11 +423,14 @@ interface ProtectedRouteRouteChildren {
 
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
   ProtectedPanelIndexRoute: ProtectedPanelIndexRoute,
+  ProtectedPaneladminEchoesIdRoute: ProtectedPaneladminEchoesIdRoute,
+  ProtectedPaneladminEchoesCreateRoute: ProtectedPaneladminEchoesCreateRoute,
   ProtectedPaneladminResonatorsIdRoute: ProtectedPaneladminResonatorsIdRoute,
   ProtectedPaneladminResonatorsCreateRoute:
     ProtectedPaneladminResonatorsCreateRoute,
   ProtectedPaneladminWeaponsIdRoute: ProtectedPaneladminWeaponsIdRoute,
   ProtectedPaneladminWeaponsCreateRoute: ProtectedPaneladminWeaponsCreateRoute,
+  ProtectedPaneladminEchoesIndexRoute: ProtectedPaneladminEchoesIndexRoute,
   ProtectedPaneladminResonatorsIndexRoute:
     ProtectedPaneladminResonatorsIndexRoute,
   ProtectedPaneladminWeaponsIndexRoute: ProtectedPaneladminWeaponsIndexRoute,

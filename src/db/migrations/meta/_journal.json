@@ -8,6 +8,13 @@
       "when": 1782685316558,
       "tag": "0000_fantastic_speed",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1782834906772,
+      "tag": "0001_typical_slapstick",
+      "breakpoints": true
     }
   ]
 }

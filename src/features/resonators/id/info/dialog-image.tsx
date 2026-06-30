@@ -24,11 +24,7 @@ export function DialogImage() {
           render={
             <TooltipTrigger
               render={
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="absolute top-2 right-2"
-                >
+                <Button size="icon" className="absolute top-2 right-2 z-40">
                   <RiUploadCloud2Fill />
                 </Button>
               }
