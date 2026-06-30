@@ -1,4 +1,3 @@
-import { Card } from '@/components/ui/card'
 import {
   useFileInput,
   DropzoneContent,
@@ -37,14 +36,11 @@ export function FileInput<T extends AssetItem>({
         <DropzoneContent state={dropzoneState} isDragActive={isDragActive} />
       </div>
 
-      {assetItems.length > 0 && (
-        <Card className="p-4 gap-2">
-          {assetItems.map((item) => {
-            const imageUrl = getImageUrl(item.key)
-            return renderItem({ item, imageUrl })
-          })}
-        </Card>
-      )}
+      {assetItems.length > 0 &&
+        assetItems.map((item) => {
+          const imageUrl = getImageUrl(item.key)
+          return renderItem({ item, imageUrl })
+        })}
     </div>
   )
 }
