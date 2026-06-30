@@ -11,5 +11,9 @@ export const Route = createFileRoute('/_protected')({
 
     return { user: session.user }
   },
-  component: () => <Outlet />,
+  component: () => (
+    <main className="container mx-auto py-4">
+      <Outlet />
+    </main>
+  ),
 })
