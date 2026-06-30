@@ -2,7 +2,7 @@ import { SignOutButton } from '#/components/sign-out-button'
 import { Button } from '#/components/ui/button'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_protected/panel/(guest)/my-roster/')({
+export const Route = createFileRoute('/_protected/panel/(guest)/roster/')({
   component: RouteComponent,
 })
 
@@ -26,7 +26,7 @@ function RouteComponent() {
         />
         <Button
           nativeButton={false}
-          render={<Link to="/panel/my-roster">Materiales</Link>}
+          render={<Link to="/panel/materials">Materiales</Link>}
         />
       </div>
 

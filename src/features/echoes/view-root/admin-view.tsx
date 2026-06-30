@@ -18,7 +18,7 @@ export function EchoAdminView() {
           nativeButton={false}
           size="icon"
           render={
-            <Link to="/panel/my-roster">
+            <Link to="/panel/roster">
               <RiArrowLeftSLine />
             </Link>
           }
