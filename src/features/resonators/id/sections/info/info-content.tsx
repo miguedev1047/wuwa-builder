@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
-import { DialogImage } from '#/features/resonators/id/info'
+import { DialogImage } from '#/features/resonators/id/sections/info/components/dialog-image'
 import { ResonatorUpdateForm } from '#/features/resonators/crud/update'
 import { DeleteResonator } from '#/features/resonators/crud/delete'
 

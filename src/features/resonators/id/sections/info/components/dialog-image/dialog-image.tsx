@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog'
 import { RiUploadCloud2Fill } from '@remixicon/react'
-import { ResonatorImageUpload } from '#/features/resonators/id/images'
+import { ResonatorImageUpload } from '#/features/resonators/id/sections/info/components/image-upload'
 import {
   Tooltip,
   TooltipContent,

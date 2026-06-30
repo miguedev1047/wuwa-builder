@@ -1,7 +1,7 @@
 import { FileInput } from '#/components/file-input'
-import { ResonatorImageItem } from '@/features/resonators/id/images'
-import { useResonatorImageUpload } from '@/features/resonators/id/images/image.hook'
-import { handleResonatorImageUpload } from '@/features/resonators/id/images/image.handlers'
+import { ResonatorImageItem } from '@/features/resonators/id/sections/info/components/image-upload/image-item'
+import { useResonatorImageUpload } from '@/features/resonators/id/sections/info/components/image-upload/image.hook'
+import { handleResonatorImageUpload } from '@/features/resonators/id/sections/info/components/image-upload/image.handlers'
 
 export function ResonatorImageUpload() {
   const { resonator, uploadMutation } = useResonatorImageUpload()
