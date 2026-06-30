@@ -26,7 +26,6 @@ export const weaponRouter = {
               },
             },
           },
-          bonuses: true,
         },
       })
       return weapons
@@ -58,7 +57,6 @@ export const weaponRouter = {
               },
             },
           },
-          bonuses: true,
         },
       })
 
