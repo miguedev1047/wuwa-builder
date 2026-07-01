@@ -1,6 +1,7 @@
 import { Button } from '#/components/ui/button'
 import { BestWeaponsPanel } from '#/features/resonators/id/best-weapons/sections'
 import { InfoContentPanel } from '#/features/resonators/id/info/sections'
+import { LevelsPanel } from '#/features/resonators/id/levels/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -42,6 +43,7 @@ function RouteComponent() {
       <div className="space-y-6">
         <InfoContentPanel />
         <BestWeaponsPanel />
+        <LevelsPanel />
       </div>
     </div>
   )
