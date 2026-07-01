@@ -59,11 +59,11 @@ export const echoRouter = {
 
   create: protectedProcedure.input(echoZod).handler(async ({ input }) => {
     try {
-      const { echo_sonatas, ...materialData } = input
+      const { echo_sonatas, ...echoData } = input
 
       const [newEcho] = await db
         .insert(echoTable)
-        .values({ ...materialData })
+        .values({ ...echoData })
         .returning({ id: echoTable.id })
 
       if (echo_sonatas.length > 0) {
