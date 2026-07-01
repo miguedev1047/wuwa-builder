@@ -1,0 +1,1 @@
+ALTER TABLE `resonator_skills` DROP COLUMN `image_url`;

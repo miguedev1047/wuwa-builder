@@ -20,7 +20,6 @@ export const resonatorSkillsTable = sqliteTable(
       .notNull()
       .references(() => resonatorTable.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
-    image_url: text('image_url').notNull(),
     description: text('description', { mode: 'json' })
       .$type<TiptapNodeProps>()
       .notNull(),
