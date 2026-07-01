@@ -1,6 +1,6 @@
 import { Button } from '#/components/ui/button'
-import { InfoContent } from '#/features/resonators/id/sections/info'
-import { BestWeapons } from '#/features/resonators/id/sections/best-weapons'
+import { BestWeaponsPanel } from '#/features/resonators/id/best-weapons/sections'
+import { InfoContentPanel } from '#/features/resonators/id/info/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -26,7 +26,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 @container/resonators">
       <header className="flex items-center gap-2">
         <Button
           nativeButton={false}
@@ -39,8 +39,10 @@ function RouteComponent() {
         />
       </header>
 
-      <InfoContent />
-      <BestWeapons />
+      <div className="space-y-6">
+        <InfoContentPanel />
+        <BestWeaponsPanel />
+      </div>
     </div>
   )
 }

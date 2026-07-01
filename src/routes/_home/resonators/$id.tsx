@@ -1,36 +1,42 @@
 import { Button } from '#/components/ui/button'
-import { EchoInfoContentPanel } from '#/features/echoes/id/info/sections'
+import { BestWeaponsHome } from '#/features/resonators/id/best-weapons/sections'
+import { InfoContentHome } from '#/features/resonators/id/info/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_protected/panel/(admin)/echoes/$id')({
+export const Route = createFileRoute('/_home/resonators/$id')({
   component: RouteComponent,
   pendingComponent: () => <div>Loading...</div>,
-  errorComponent: () => <div>Ha ocurrido un error al obtener el eco</div>,
+  errorComponent: () => <div>Ha ocurrido un error al obtener el resonador</div>,
   loader: ({ context, params }) => {
     context.queryClient.ensureQueryData(
-      orpc.echoes.echo.getById.queryOptions({ input: { id: params.id } }),
+      orpc.resonators.resonator.getById.queryOptions({
+        input: { id: params.id },
+      }),
     )
   },
 })
 
 function RouteComponent() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 @container/resonators">
       <header className="flex items-center gap-2">
         <Button
           nativeButton={false}
           size="icon"
           render={
-            <Link to="/panel/echoes">
+            <Link to="/resonators">
               <RiArrowLeftSLine />
             </Link>
           }
         />
       </header>
 
-      <EchoInfoContentPanel />
+      <div className="space-y-6">
+        <InfoContentHome />
+        <BestWeaponsHome />
+      </div>
     </div>
   )
 }

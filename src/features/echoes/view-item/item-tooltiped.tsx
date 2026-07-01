@@ -9,14 +9,15 @@ import { Link } from '@tanstack/react-router'
 
 interface EchoTooltipedProps {
   echo: TEchoTable
+  to?: string
 }
 
-export function EchoTooltiped({ echo }: EchoTooltipedProps) {
+export function EchoTooltiped({ echo, to = '/panel/echoes/$id' }: EchoTooltipedProps) {
   return (
     <Tooltip>
       <TooltipTrigger
         render={
-          <Link to="/panel/echoes/$id" params={{ id: echo.id }}>
+          <Link to={to} params={{ id: echo.id }}>
             <EchoItemBase echo={echo} />
           </Link>
         }

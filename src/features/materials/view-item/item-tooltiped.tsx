@@ -9,14 +9,15 @@ import { Link } from '@tanstack/react-router'
 
 interface MaterialTooltipedProps {
   material: TMaterialTable
+  to?: string
 }
 
-export function MaterialTooltiped({ material }: MaterialTooltipedProps) {
+export function MaterialTooltiped({ material, to = '/panel/materials/$id' }: MaterialTooltipedProps) {
   return (
     <Tooltip>
       <TooltipTrigger
         render={
-          <Link to="/panel/materials/$id" params={{ id: material.id }}>
+          <Link to={to} params={{ id: material.id }}>
             <MaterialItemBase material={material} />
           </Link>
         }

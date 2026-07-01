@@ -11,13 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
-import { Route as homeIndexRouteImport } from './routes/(home)/index'
+import { Route as HomeRouteRouteImport } from './routes/_home/route'
+import { Route as HomeIndexRouteImport } from './routes/_home/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
 import { Route as AuthErrorIndexRouteImport } from './routes/auth/error/index'
 import { Route as ProtectedPanelIndexRouteImport } from './routes/_protected/panel/index'
+import { Route as HomeResonatorsIndexRouteImport } from './routes/_home/resonators/index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 import { Route as ApiContentSearchRouteImport } from './routes/api/content/search'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as HomeResonatorsIdRouteImport } from './routes/_home/resonators/$id'
 import { Route as ProtectedPanelguestRosterIndexRouteImport } from './routes/_protected/panel/(guest)/roster/index'
 import { Route as ProtectedPaneladminWeaponsIndexRouteImport } from './routes/_protected/panel/(admin)/weapons/index'
 import { Route as ProtectedPaneladminResonatorsIndexRouteImport } from './routes/_protected/panel/(admin)/resonators/index'
@@ -41,10 +44,14 @@ const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
   id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
-const homeIndexRoute = homeIndexRouteImport.update({
-  id: '/(home)/',
-  path: '/',
+const HomeRouteRoute = HomeRouteRouteImport.update({
+  id: '/_home',
   getParentRoute: () => rootRouteImport,
+} as any)
+const HomeIndexRoute = HomeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => HomeRouteRoute,
 } as any)
 const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/login/',
@@ -61,6 +68,11 @@ const ProtectedPanelIndexRoute = ProtectedPanelIndexRouteImport.update({
   path: '/panel/',
   getParentRoute: () => ProtectedRouteRoute,
 } as any)
+const HomeResonatorsIndexRoute = HomeResonatorsIndexRouteImport.update({
+  id: '/resonators/',
+  path: '/resonators/',
+  getParentRoute: () => HomeRouteRoute,
+} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -75,6 +87,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const HomeResonatorsIdRoute = HomeResonatorsIdRouteImport.update({
+  id: '/resonators/$id',
+  path: '/resonators/$id',
+  getParentRoute: () => HomeRouteRoute,
 } as any)
 const ProtectedPanelguestRosterIndexRoute =
   ProtectedPanelguestRosterIndexRouteImport.update({
@@ -156,11 +173,13 @@ const ProtectedPaneladminEchoesIdRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof homeIndexRoute
+  '/': typeof HomeIndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
+  '/resonators/$id': typeof HomeResonatorsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/content/search': typeof ApiContentSearchRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/resonators/': typeof HomeResonatorsIndexRoute
   '/panel/': typeof ProtectedPanelIndexRoute
   '/auth/error/': typeof AuthErrorIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -179,11 +198,13 @@ export interface FileRoutesByFullPath {
   '/panel/roster/': typeof ProtectedPanelguestRosterIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof homeIndexRoute
+  '/': typeof HomeIndexRoute
   '/auth': typeof AuthRouteRouteWithChildren
+  '/resonators/$id': typeof HomeResonatorsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/content/search': typeof ApiContentSearchRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/resonators': typeof HomeResonatorsIndexRoute
   '/panel': typeof ProtectedPanelIndexRoute
   '/auth/error': typeof AuthErrorIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
@@ -203,12 +224,15 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_home': typeof HomeRouteRouteWithChildren
   '/_protected': typeof ProtectedRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
-  '/(home)/': typeof homeIndexRoute
+  '/_home/': typeof HomeIndexRoute
+  '/_home/resonators/$id': typeof HomeResonatorsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/content/search': typeof ApiContentSearchRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/_home/resonators/': typeof HomeResonatorsIndexRoute
   '/_protected/panel/': typeof ProtectedPanelIndexRoute
   '/auth/error/': typeof AuthErrorIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -231,9 +255,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/resonators/$id'
     | '/api/auth/$'
     | '/api/content/search'
     | '/api/rpc/$'
+    | '/resonators/'
     | '/panel/'
     | '/auth/error/'
     | '/auth/login/'
@@ -254,9 +280,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/resonators/$id'
     | '/api/auth/$'
     | '/api/content/search'
     | '/api/rpc/$'
+    | '/resonators'
     | '/panel'
     | '/auth/error'
     | '/auth/login'
@@ -275,12 +303,15 @@ export interface FileRouteTypes {
     | '/panel/roster'
   id:
     | '__root__'
+    | '/_home'
     | '/_protected'
     | '/auth'
-    | '/(home)/'
+    | '/_home/'
+    | '/_home/resonators/$id'
     | '/api/auth/$'
     | '/api/content/search'
     | '/api/rpc/$'
+    | '/_home/resonators/'
     | '/_protected/panel/'
     | '/auth/error/'
     | '/auth/login/'
@@ -300,9 +331,9 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  HomeRouteRoute: typeof HomeRouteRouteWithChildren
   ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
-  homeIndexRoute: typeof homeIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiContentSearchRoute: typeof ApiContentSearchRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
@@ -324,12 +355,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(home)/': {
-      id: '/(home)/'
+    '/_home': {
+      id: '/_home'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HomeRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_home/': {
+      id: '/_home/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof homeIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof HomeIndexRouteImport
+      parentRoute: typeof HomeRouteRoute
     }
     '/auth/login/': {
       id: '/auth/login/'
@@ -352,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedPanelIndexRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_home/resonators/': {
+      id: '/_home/resonators/'
+      path: '/resonators'
+      fullPath: '/resonators/'
+      preLoaderRoute: typeof HomeResonatorsIndexRouteImport
+      parentRoute: typeof HomeRouteRoute
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -372,6 +417,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_home/resonators/$id': {
+      id: '/_home/resonators/$id'
+      path: '/resonators/$id'
+      fullPath: '/resonators/$id'
+      preLoaderRoute: typeof HomeResonatorsIdRouteImport
+      parentRoute: typeof HomeRouteRoute
     }
     '/_protected/panel/(guest)/roster/': {
       id: '/_protected/panel/(guest)/roster/'
@@ -467,6 +519,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface HomeRouteRouteChildren {
+  HomeIndexRoute: typeof HomeIndexRoute
+  HomeResonatorsIdRoute: typeof HomeResonatorsIdRoute
+  HomeResonatorsIndexRoute: typeof HomeResonatorsIndexRoute
+}
+
+const HomeRouteRouteChildren: HomeRouteRouteChildren = {
+  HomeIndexRoute: HomeIndexRoute,
+  HomeResonatorsIdRoute: HomeResonatorsIdRoute,
+  HomeResonatorsIndexRoute: HomeResonatorsIndexRoute,
+}
+
+const HomeRouteRouteWithChildren = HomeRouteRoute._addFileChildren(
+  HomeRouteRouteChildren,
+)
+
 interface ProtectedRouteRouteChildren {
   ProtectedPanelIndexRoute: typeof ProtectedPanelIndexRoute
   ProtectedPaneladminEchoesIdRoute: typeof ProtectedPaneladminEchoesIdRoute
@@ -524,9 +592,9 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  HomeRouteRoute: HomeRouteRouteWithChildren,
   ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
-  homeIndexRoute: homeIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiContentSearchRoute: ApiContentSearchRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,

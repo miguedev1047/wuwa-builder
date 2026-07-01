@@ -1,12 +1,12 @@
 import { EntityViewList, EntityViewRoot } from '#/components/entity-view'
 import { Button } from '#/components/ui/button'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
+import { RiArrowLeftSLine } from '@remixicon/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
-import { ResonatorTooltiped } from '#/features/resonators/view-item/item-tooltiped'
-import { RiArrowLeftSLine } from '@remixicon/react'
+import { ResonatorTooltiped } from '#/features/resonators/view-item'
 
-export function ResonatorAdminView() {
+export function ResonatorHomeView() {
   const { data: resonators } = useSuspenseQuery(
     orpc.resonators.resonator.getAll.queryOptions(),
   )
@@ -18,15 +18,10 @@ export function ResonatorAdminView() {
           nativeButton={false}
           size="icon"
           render={
-            <Link to="/panel/roster">
+            <Link to="/">
               <RiArrowLeftSLine />
             </Link>
           }
-        />
-
-        <Button
-          nativeButton={false}
-          render={<Link to="/panel/resonators/create">Crear resonador</Link>}
         />
       </div>
 
@@ -36,7 +31,7 @@ export function ResonatorAdminView() {
             <ResonatorTooltiped
               key={item.id}
               resonator={item}
-              to="/panel/resonators/$id"
+              to="/resonators/$id"
             />
           )}
         </EntityViewList>
