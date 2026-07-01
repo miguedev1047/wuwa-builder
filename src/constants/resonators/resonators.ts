@@ -103,31 +103,31 @@ export const RESONATOR_RESONANCE_CHAINS = [
   {
     label: 'Resonancia 1',
     value: 'resonance_chain_1',
-    order: 1,
+    order: 0,
   },
   {
     label: 'Resonancia 2',
     value: 'resonance_chain_2',
-    order: 2,
+    order: 1,
   },
   {
     label: 'Resonancia 3',
     value: 'resonance_chain_3',
-    order: 3,
+    order: 2,
   },
   {
     label: 'Resonancia 4',
     value: 'resonance_chain_4',
-    order: 4,
+    order: 3,
   },
   {
     label: 'Resonancia 5',
     value: 'resonance_chain_5',
-    order: 5,
+    order: 4,
   },
   {
     label: 'Resonancia 6',
     value: 'resonance_chain_6',
-    order: 6,
+    order: 5,
   },
 ]
