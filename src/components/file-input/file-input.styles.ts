@@ -11,7 +11,7 @@ export const dropzoneContainerStyles = cva('', {
 })
 
 export const emptyAreaStyles = cva(
-  'w-full h-80 cursor-pointer border border-dashed',
+  'w-full h-48 cursor-pointer border border-dashed',
   {
     variants: {
       dragActive: {

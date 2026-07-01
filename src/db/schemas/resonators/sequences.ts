@@ -43,13 +43,13 @@ export const resonatorSequencesAssetsTable = sqliteTable(
   {
     ...createAssetColumns(),
 
-    resonator_id: text('resonator_id')
+    sequence_id: text('sequence_id')
       .notNull()
       .references(() => resonatorSequencesTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
     uniqueIndex('resonator_sequences_assets_unique').on(
-      table.resonator_id,
+      table.sequence_id,
       table.order,
     ),
   ],

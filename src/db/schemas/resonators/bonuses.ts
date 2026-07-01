@@ -40,13 +40,13 @@ export const resonatorBonusAssetsTable = sqliteTable(
   {
     ...createAssetColumns(),
 
-    resonator_id: text('resonator_id')
+    bonus_id: text('bonus_id')
       .notNull()
       .references(() => resonatorBonusesTable.id, { onDelete: 'cascade' }),
   },
   (table) => [
     uniqueIndex('resonator_bonuses_assets_unique').on(
-      table.resonator_id,
+      table.bonus_id,
       table.order,
     ),
   ],

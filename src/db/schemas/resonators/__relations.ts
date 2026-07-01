@@ -77,7 +77,7 @@ export const resonatorSkillsAssetsRelations = relations(
   resonatorSkillsAssetsTable,
   ({ one }) => ({
     skill: one(resonatorSkillsTable, {
-      fields: [resonatorSkillsAssetsTable.resonator_id],
+      fields: [resonatorSkillsAssetsTable.skill_id],
       references: [resonatorSkillsTable.id],
     }),
   }),
@@ -98,7 +98,7 @@ export const resonatorSequencesAssetsRelations = relations(
   resonatorSequencesAssetsTable,
   ({ one }) => ({
     sequence: one(resonatorSequencesTable, {
-      fields: [resonatorSequencesAssetsTable.resonator_id],
+      fields: [resonatorSequencesAssetsTable.sequence_id],
       references: [resonatorSequencesTable.id],
     }),
   }),
@@ -119,7 +119,7 @@ export const resonatorBonusAssetsRelations = relations(
   resonatorBonusAssetsTable,
   ({ one }) => ({
     bonus: one(resonatorBonusesTable, {
-      fields: [resonatorBonusAssetsTable.resonator_id],
+      fields: [resonatorBonusAssetsTable.bonus_id],
       references: [resonatorBonusesTable.id],
     }),
   }),
