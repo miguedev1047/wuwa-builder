@@ -3,12 +3,12 @@ import { TiptapViewer } from '#/components/editor/editor-viewer'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useParams } from '@tanstack/react-router'
-import { DialogImage } from '#/features/resonators/id/sections/info/components/dialog-image'
+import { DialogImage } from '#/features/resonators/id/info/components/dialog-image'
 import { ResonatorUpdateForm } from '#/features/resonators/crud/update'
 import { DeleteResonator } from '#/features/resonators/crud/delete'
+import { useParams } from '@tanstack/react-router'
 
-export function InfoContent() {
+export function InfoContentPanel() {
   const { id } = useParams({ from: '/_protected/panel/(admin)/resonators/$id' })
 
   const { data: resonator } = useSuspenseQuery(
@@ -21,7 +21,9 @@ export function InfoContent() {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>{resonator.name}</CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            {resonator.name}
+          </CardTitle>
           <div className="flex items-center gap-2">
             <ResonatorUpdateForm />
             <DeleteResonator />
@@ -30,7 +32,7 @@ export function InfoContent() {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1 relative">
+          <div className="col-span-5 md:col-span-1 relative">
             <AssetImage
               assetItems={resonatorAssets}
               selectAssetNumber={0}
@@ -40,7 +42,7 @@ export function InfoContent() {
             <DialogImage />
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-5 md:col-span-4">
             <TiptapViewer value={resonator.description} />
           </div>
         </div>

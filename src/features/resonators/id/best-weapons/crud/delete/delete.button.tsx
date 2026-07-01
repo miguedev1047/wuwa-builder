@@ -1,5 +1,5 @@
 import { EntityDeleteItem } from '#/components/entity-delete-item'
-import { useBestWeaponDelete } from '#/features/resonators/id/sections/best-weapons/crud/delete'
+import { useBestWeaponDelete } from '#/features/resonators/id/best-weapons/crud/delete'
 
 interface DeleteBestWeaponProps {
   bestWeaponId: string

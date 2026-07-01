@@ -5,18 +5,22 @@ import {
 } from '#/components/ui/tooltip'
 import type { TResonatorTable } from '#/integrations/orpc/routers/resonators/__types'
 import { ResonatorItemBase } from '#/features/resonators/view-item/item-base'
-import { Link } from '@tanstack/react-router'
+import { Link, type LinkProps } from '@tanstack/react-router'
 
 interface ItemCardTooltipedProps {
   resonator: TResonatorTable
+  to: LinkProps['to']
 }
 
-export function ResonatorTooltiped({ resonator }: ItemCardTooltipedProps) {
+export function ResonatorTooltiped({
+  resonator,
+  to = '/panel/resonators/$id',
+}: ItemCardTooltipedProps) {
   return (
     <Tooltip>
       <TooltipTrigger
         render={
-          <Link to="/panel/resonators/$id" params={{ id: resonator.id }}>
+          <Link to={to} params={{ id: resonator.id }}>
             <ResonatorItemBase resonator={resonator} />
           </Link>
         }

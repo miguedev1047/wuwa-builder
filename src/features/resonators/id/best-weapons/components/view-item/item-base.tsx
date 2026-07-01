@@ -7,13 +7,17 @@ import {
   ItemTitle,
 } from '#/components/ui/item'
 import type { TResonatorBestWeaponTable } from '#/integrations/orpc/routers/resonators'
-import { DeleteBestWeapon } from '#/features/resonators/id/sections/best-weapons/crud/delete'
+import { DeleteBestWeapon } from '#/features/resonators/id/best-weapons/crud/delete'
 
 interface BestWeaponItemProps {
   bestWeapon: TResonatorBestWeaponTable
+  isAdmin?: boolean
 }
 
-export function BestWeaponItem({ bestWeapon }: BestWeaponItemProps) {
+export function BestWeaponBaseItem({
+  bestWeapon,
+  isAdmin = false,
+}: BestWeaponItemProps) {
   return (
     <Item variant="outline">
       <ItemMedia variant="image">
@@ -26,9 +30,11 @@ export function BestWeaponItem({ bestWeapon }: BestWeaponItemProps) {
       <ItemContent>
         <ItemTitle>{bestWeapon.weapon.name}</ItemTitle>
       </ItemContent>
-      <ItemActions>
-        <DeleteBestWeapon bestWeaponId={bestWeapon.id} />
-      </ItemActions>
+      {isAdmin && (
+        <ItemActions>
+          <DeleteBestWeapon bestWeaponId={bestWeapon.id} />
+        </ItemActions>
+      )}
     </Item>
   )
 }
