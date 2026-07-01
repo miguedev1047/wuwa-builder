@@ -39,6 +39,11 @@ export const resonatorRouter = {
           },
           skills: {
             orderBy: (table, { asc }) => asc(table.order),
+            with: {
+              assets: {
+                orderBy: (table, { asc }) => asc(table.order),
+              },
+            },
           },
           bonuses: true,
         },
@@ -85,6 +90,11 @@ export const resonatorRouter = {
           },
           skills: {
             orderBy: (table, { asc }) => asc(table.order),
+            with: {
+              assets: {
+                orderBy: (table, { asc }) => asc(table.order),
+              },
+            },
           },
           bonuses: true,
         },
