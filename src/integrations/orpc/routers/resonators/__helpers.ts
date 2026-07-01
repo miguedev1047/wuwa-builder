@@ -1,5 +1,8 @@
 import { db } from '#/db'
-import { resonatorAssetsTable } from '#/db/schemas/resonators'
+import {
+  resonatorAssetsTable,
+  resonatorSkillsAssetsTable,
+} from '#/db/schemas/resonators'
 import { env } from 'cloudflare:workers'
 import { eq } from 'drizzle-orm'
 
@@ -17,4 +20,20 @@ export async function deleteResonatorAssets(resonatorId: string) {
   await db
     .delete(resonatorAssetsTable)
     .where(eq(resonatorAssetsTable.resonator_id, resonatorId))
+}
+
+export async function deleteResonatorSkillsAssets(skillId: string) {
+  const assets = await db.query.resonatorSkillsAssetsTable.findMany({
+    where: (table, { eq: equals }) => equals(table.skill_id, skillId),
+  })
+
+  const keys = assets.map((asset) => asset.key)
+
+  if (keys.length > 0) {
+    await env.wuwa_builds_storage.delete(keys)
+  }
+
+  await db
+    .delete(resonatorSkillsAssetsTable)
+    .where(eq(resonatorSkillsAssetsTable.skill_id, skillId))
 }
