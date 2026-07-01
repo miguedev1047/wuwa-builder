@@ -1,7 +1,7 @@
 import { FileInput } from '#/components/file-input'
-import { MaterialImageItem } from '@/features/materials/id/images'
-import { handleMaterialImageUpload } from '@/features/materials/id/images/image.handlers'
-import { useMaterialImageUpload } from '@/features/materials/id/images/image.hook'
+import { MaterialImageItem } from './image-item'
+import { handleMaterialImageUpload } from './image.handlers'
+import { useMaterialImageUpload } from './image.hook'
 
 export function MaterialImageUpload() {
   const { material, uploadMutation } = useMaterialImageUpload()

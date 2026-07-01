@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog'
 import { RiUploadCloud2Fill } from '@remixicon/react'
-import { WeaponImageUpload } from '#/features/weapons/id/images'
+import { WeaponImageUpload } from '#/features/weapons/id/info/components/image-upload'
 import {
   Tooltip,
   TooltipContent,

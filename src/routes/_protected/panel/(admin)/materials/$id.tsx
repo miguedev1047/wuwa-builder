@@ -1,5 +1,5 @@
 import { Button } from '#/components/ui/button'
-import { InfoContent } from '#/features/materials/id/info'
+import { MaterialInfoContentPanel } from '#/features/materials/id/info/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -36,7 +36,7 @@ function RouteComponent() {
         />
       </header>
 
-      <InfoContent />
+      <MaterialInfoContentPanel />
     </div>
   )
 }

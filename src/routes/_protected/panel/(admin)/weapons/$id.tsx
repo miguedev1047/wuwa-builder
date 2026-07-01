@@ -1,5 +1,5 @@
 import { Button } from '#/components/ui/button'
-import { InfoContent } from '#/features/weapons/id/info'
+import { WeaponInfoContentPanel } from '#/features/weapons/id/info/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -32,7 +32,7 @@ function RouteComponent() {
         />
       </header>
 
-      <InfoContent />
+      <WeaponInfoContentPanel />
     </div>
   )
 }

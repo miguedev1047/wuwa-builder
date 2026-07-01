@@ -4,12 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
-import { DialogImage } from '#/features/weapons/id/info'
-import { WeaponUpdateForm } from '#/features/weapons/crud/update'
-import { DeleteWeapon } from '#/features/weapons/crud/delete'
 
-export function InfoContent() {
-  const { id } = useParams({ from: '/_protected/panel/(admin)/weapons/$id' })
+export function WeaponInfoContentHome() {
+  const { id } = useParams({ from: '/_home/weapons/$id' })
 
   const { data: weapon } = useSuspenseQuery(
     orpc.weapons.weapon.getById.queryOptions({ input: { id } }),
@@ -21,26 +18,23 @@ export function InfoContent() {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>{weapon.name}</CardTitle>
-          <div className="flex items-center gap-2">
-            <WeaponUpdateForm />
-            <DeleteWeapon />
-          </div>
+          <CardTitle className="text-2xl font-semibold">
+            {weapon.name}
+          </CardTitle>
         </div>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1 relative">
+          <div className="col-span-5 md:col-span-1 relative">
             <AssetImage
               assetItems={weaponAssets}
               selectAssetNumber={0}
               className="aspect-square"
               disablePointerEvents
             />
-            <DialogImage />
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-5 md:col-span-4">
             <TiptapViewer value={weapon.description} />
           </div>
         </div>

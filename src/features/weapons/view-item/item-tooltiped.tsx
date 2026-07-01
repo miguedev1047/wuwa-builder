@@ -9,14 +9,15 @@ import { Link } from '@tanstack/react-router'
 
 interface WeaponTooltipedProps {
   weapon: TWeaponTable
+  to?: string
 }
 
-export function WeaponTooltiped({ weapon }: WeaponTooltipedProps) {
+export function WeaponTooltiped({ weapon, to = '/panel/weapons/$id' }: WeaponTooltipedProps) {
   return (
     <Tooltip>
       <TooltipTrigger
         render={
-          <Link to="/panel/weapons/$id" params={{ id: weapon.id }}>
+          <Link to={to} params={{ id: weapon.id }}>
             <WeaponItemBase weapon={weapon} />
           </Link>
         }

@@ -1,7 +1,7 @@
 import { FileInput } from '#/components/file-input'
-import { WeaponImageItem } from '@/features/weapons/id/images'
-import { useWeaponImageUpload } from '@/features/weapons/id/images/image.hook'
-import { handleWeaponImageUpload } from '@/features/weapons/id/images/image.handlers'
+import { WeaponImageItem } from './image-item'
+import { useWeaponImageUpload } from './image.hook'
+import { handleWeaponImageUpload } from './image.handlers'
 
 export function WeaponImageUpload() {
   const { weapon, uploadMutation } = useWeaponImageUpload()

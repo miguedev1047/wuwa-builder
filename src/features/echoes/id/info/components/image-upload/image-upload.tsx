@@ -1,7 +1,7 @@
 import { FileInput } from '#/components/file-input'
-import { EchoImageItem } from '@/features/echoes/id/images'
-import { handleEchoImageUpload } from '@/features/echoes/id/images/image.handlers'
-import { useEchoImageUpload } from '@/features/echoes/id/images/image.hook'
+import { EchoImageItem } from './image-item'
+import { handleEchoImageUpload } from './image.handlers'
+import { useEchoImageUpload } from './image.hook'
 
 export function EchoImageUpload() {
   const { echo, uploadMutation } = useEchoImageUpload()

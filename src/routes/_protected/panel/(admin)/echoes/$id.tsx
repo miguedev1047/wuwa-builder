@@ -1,5 +1,5 @@
 import { Button } from '#/components/ui/button'
-import { InfoContent } from '#/features/echoes/id/info'
+import { EchoInfoContentPanel } from '#/features/echoes/id/info/sections'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { RiArrowLeftSLine } from '@remixicon/react'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -30,7 +30,7 @@ function RouteComponent() {
         />
       </header>
 
-      <InfoContent />
+      <EchoInfoContentPanel />
     </div>
   )
 }

@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog'
 import { RiUploadCloud2Fill } from '@remixicon/react'
-import { EchoImageUpload } from '#/features/echoes/id/images'
+import { EchoImageUpload } from '#/features/echoes/id/info/components/image-upload'
 import {
   Tooltip,
   TooltipContent,

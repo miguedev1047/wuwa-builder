@@ -1,2 +1,2 @@
-export * from './info-content'
-export * from './dialog-image'
+export * from './sections'
+export * from './components/dialog-image'

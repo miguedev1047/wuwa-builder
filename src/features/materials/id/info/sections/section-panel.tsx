@@ -4,11 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { orpc } from '#/integrations/tanstack-query/orpc-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
-import { DialogImage } from '#/features/materials/id/info'
+import { DialogImage } from '#/features/materials/id/info/components/dialog-image'
 import { MaterialUpdateForm } from '#/features/materials/crud/update'
 import { DeleteMaterial } from '#/features/materials/crud/delete'
 
-export function InfoContent() {
+export function MaterialInfoContentPanel() {
   const { id } = useParams({ from: '/_protected/panel/(admin)/materials/$id' })
 
   const { data: material } = useSuspenseQuery(
@@ -21,7 +21,9 @@ export function InfoContent() {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>{material.name}</CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            {material.name}
+          </CardTitle>
           <div className="flex items-center gap-2">
             <MaterialUpdateForm />
             <DeleteMaterial />
@@ -30,7 +32,7 @@ export function InfoContent() {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1 relative">
+          <div className="col-span-5 md:col-span-1 relative">
             <AssetImage
               assetItems={materialAssets}
               selectAssetNumber={0}
@@ -40,7 +42,7 @@ export function InfoContent() {
             <DialogImage />
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-5 md:col-span-4">
             <TiptapViewer value={material.description} />
           </div>
         </div>
